@@ -1,0 +1,27 @@
+{
+  "name": "roast",
+  "version": "0.1.0",
+  "engines": {
+    "node": "0.6.18"
+  },
+  "engine": {
+    "node": "0.6.18",
+    "mongodb": "2.0.6"
+  },
+  "dependencies": {
+    "async": "0.1.22",
+    "coffeekup": "0.3.1",
+    "coffee-script": "1.3.3",
+    "connect-assets": "2.2.1",
+    "connect-mongodb": "1.1.3",
+    "express": "3.x",
+    "less": "1.3.0",
+    "mongoose": "2.6.6",
+    "mongoose-types": "1.0.3",
+    "nodemailer": "0.3.20",
+    "underscore": "1.3.3"
+  },
+  "devDependencies": {
+    "node-dev": "0.2.2"
+  }
+}
