@@ -1,5 +1,6 @@
 # External imports
 fs = require('fs')
+coffeekup = require('coffeekup')
 
 ## Function exports
 # Function for rendering coffeekup

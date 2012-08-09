@@ -2,8 +2,8 @@
 module.exports = ((app) ->
 
   # Test route
-  app.get('/test', (req, res) ->
-    res.render('index')
+  app.get('/home', (req, res) ->
+    res.render('home')
   )
 
 )
