@@ -1,5 +1,7 @@
+# External imports
 fs = require('fs')
 
+## Function exports
 # Function for rendering coffeekup
 module.exports.coffeeEngine = (path, options, cb) ->
   fs.readFile(path, 'utf8', (err, str) ->
