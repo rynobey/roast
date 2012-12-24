@@ -4,11 +4,10 @@ utils = require('../utils')
 module.exports = ((app) ->
 
   # Test route
-  app.get('/', (req, res) ->
-    utils.checkDBInit()
+  app.get('/', (req, res,next) ->
     res.render('home')
   )
 
-  
+
 
 )
