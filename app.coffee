@@ -1,61 +1,64 @@
 # External imports
-fs = require('fs')
 express = require('express')
 app = require('express')()
-mysql = require('mysql')
 MySqlSessionStore = require('connect-mysql-session')(express)
 
 # Internal imports
 utils = require('./utils')
 
-
 # App settings
 app.set('views', './views/')
 app.set('view engine', 'coffee')
 app.set('view options', {layout:false, format:true})
+app.set('dbhost', 'localhost')
+app.set('dbname', 'roast')
+app.set('dbuser', 'roast')
+app.set('dbpass', 'Theansweris2442')
 app.engine('coffee', utils.coffeeEngine)
-utils.checkDBInit()
 app.use(express.cookieParser())
-app.use(
-  express.session({
-    secret:'randomCookieSecretPhrase',
-    store: new MySqlSessionStore('roast', 'root', 'roast-mysql', {
-      host:'localhost',
-      logging: false
-    })
+app.use(express.session({
+  secret:'randomCookieSecretPhrase',
+  store: new MySqlSessionStore(app.set('dbname'), app.set('dbuser'), app.set('dbpass'), {
+    host:app.set('dbhost'),
+    logging: false
   })
-)
+}))
 app.use(express.bodyParser())
+app.seq = utils.sequelize(app)
+app.users = utils.users(app.seq)
+app.coffees = utils.coffees(app.seq)
+app.purchases = utils.purchases(app.seq)
+app.payments = utils.payments(app.seq)
+app.seq.sync()
+utils.checkDBInit(app.users)
 
+# Auth/Login route
 app.post('/auth', (req, res, next) ->
   email = req.param('username', null)
   pass = req.param('password', null)
-  dbcon = mysql.createConnection({
-    host: 'localhost',
-    user: 'root'
-    password: 'roast-mysql'
-  })
-  dbcon.connect()
-  dbcon.query("USE roast",(err) ->
-    dbcon.query("SELECT id FROM users WHERE email='#{email}' AND password='#{pass}'",
-    (err, rows, fields) ->
-      if rows? and rows.length > 0
-        id = rows[0].id
-        sid = utils.extractSID(req.cookies['connect.sid'])
-        dbcon.query("UPDATE users SET sid='#{sid}' WHERE id=#{id}", (err) ->
-          res.redirect('/')
-        )
-      else
+  app.users.find({ where: {email: email, password: pass} }).success((user) ->
+    if user?
+      id = user.id
+      sid = utils.extractSID(req.cookies['connect.sid'])
+      user.sid = sid
+      user.save(['sid']).success(() ->
         res.redirect('/')
-    )
+      ).error((err) ->
+        res.redirect('/')
+      )
+    else
+      res.redirect('/')
+  ).error((err) ->
+    res.redirect('/')
   )
 )
 
-app.all('*', utils.restrict(), (req, res, next) ->
+# All requests pass through here for authentication
+app.all('*', utils.restrict(app.users), (req, res, next) ->
    next()
 )
 
-# Resources (RESTful)
+# Import routes/resources
 require('./resources/users')(app)
 
 app.get('/partials/:view', (req, res, next) ->

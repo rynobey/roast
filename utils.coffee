@@ -1,15 +1,17 @@
 # External imports
-async = require('async')
 fs = require('fs')
 coffeekup = require('coffeekup')
-mysql = require('mysql')
+Sequelize = require('sequelize')
 
-Forbidden = (() ->
-  @name = 'Forbidden'
-)
-Forbidden::__proto__ = Error::
+extractSID = (cookie) ->
+  start = cookie.indexOf(':') + 1
+  end = cookie.indexOf('.')
+  return cookie.substring(start, end)
 
 ## Function exports
+#
+module.exports.extractSID = extractSID
+
 # Function for rendering coffeekup
 module.exports.coffeeEngine = (path, options, cb) ->
   fs.readFile(path, 'utf8', (err, str) ->
@@ -22,100 +24,101 @@ module.exports.coffeeEngine = (path, options, cb) ->
       cb(e)
   )
 
-module.exports.restrict = () ->
+module.exports.sequelize = (app) ->
+  db = app.set('dbname')
+  user = app.set('dbuser')
+  pass = app.set('dbpass')
+  options = {host:app.set('dbhost'), logging:false}
+  return new Sequelize(db, user, pass, options)
+
+module.exports.users = (sequelize) ->
+  users = sequelize.define('User', {
+    id: {
+      type:Sequelize.INTEGER,
+      primaryKey:true,
+      autoIncrement:true
+    },
+    name: {
+      type:Sequelize.STRING,
+      validate: {
+        is:["[a-z]", 'i']
+      }
+    },
+    email: {
+      type:Sequelize.STRING,
+      validate: {
+        isEmail:true
+      }
+    },
+    password: {
+      type:Sequelize.STRING,
+      validate: {
+        isEmpty:false,
+      }
+    },
+    balance: Sequelize.FLOAT,
+    sid: Sequelize.STRING
+  })
+  return users
+
+module.exports.coffees = (sequelize) ->
+  coffees = sequelize.define('Coffee', {
+    id: {
+      type:Sequelize.INTEGER,
+      primaryKey:true,
+      autoIncrement:true
+    },
+    consumedByID: Sequelize.INTEGER
+  })
+  return coffees
+
+module.exports.purchases = (sequelize) ->
+  purchases = sequelize.define('Purchase', {
+    id: {
+      type:Sequelize.INTEGER,
+      primaryKey:true,
+      autoIncrement:true
+    },
+    purchasedByID: Sequelize.INTEGER,
+    description: Sequelize.STRING
+  })
+  return purchases
+
+module.exports.payments = (sequelize) ->
+  payments = sequelize.define('Payment', {
+    id: {
+      type:Sequelize.INTEGER,
+      primaryKey:true,
+      autoIncrement:true
+    },
+    paymentByID: Sequelize.INTEGER
+  })
+  return payments
+
+module.exports.restrict = (users) ->
   return (req, res, next) ->
     if req? and req.cookies? and req.cookies['connect.sid']?
-      dbcon = mysql.createConnection({
-        host: 'localhost',
-        user: 'root'
-        password: 'roast-mysql'
-      })
-      dbcon.connect()
-      dbcon.query("USE roast",(err) ->
-        sid = extractSID(req.cookies['connect.sid'])
-        dbcon.query("SELECT id FROM users WHERE sid='#{sid}'",
-        (err, rows, fields) ->
-          if rows? and rows.length > 0
-            return next()
-          else
-            res.render('login')
-        )
+      sid = extractSID(req.cookies['connect.sid'])
+      users.find({ where: {sid: sid} }).success((user) ->
+        if user?
+          return next()
+        else
+          res.render('login')
+      ).error((err) ->
+        res.render('login')
       )
     else
       res.render('login')
 
-module.exports.checkDBInit = () ->
-  dbcon = mysql.createConnection({
-    host: 'localhost',
-    user: 'root'
-    password: 'roast-mysql'
-  })
-  dbcon.connect()
-  async.series([
-    (cb) ->
-      # Create roast db if not existing
-      dbcon.query('USE roast', (err, rows, fields) ->
-        if err? and (err.code is 'ER_BAD_DB_ERROR')
-          console.log 'db does not exist, being created now...'
-          dbcon.query('CREATE DATABASE roast', (err) ->
-            cb(null)
-          )
-        else
-          cb(null)
-      )
-    (cb) ->
-      dbcon.query('USE roast', (err) ->
-        cb(null)
-      )
-    (cb) ->
-      # Create consumption table if not existing
-      dbcon.query('CREATE TABLE IF NOT EXISTS consumption (id BIGINT AUTO_INCREMENT, 
-        consumedAt DATETIME, consumedByID BIGINT, PRIMARY KEY(id))', (err) ->
-        cb(null)
-      )
-    (cb) ->
-      # Create purchases table if not existing
-      dbcon.query('CREATE TABLE IF NOT EXISTS purchases (id BIGINT AUTO_INCREMENT, 
-        purchasedAt DATETIME, purchasedByID BIGINT, description VARCHAR(255), 
-        PRIMARY KEY(id))', (err) ->
-        cb(null)
-      )
-    (cb) ->
-      # Create payments table if not existing
-      dbcon.query('CREATE TABLE IF NOT EXISTS payments (id BIGINT AUTO_INCREMENT, 
-        paidAt DATETIME, paidByID BIGINT, PRIMARY KEY(id))', (err) ->
-        cb(null)
-      )
-    (cb) ->
-      # Create users table if not existing
-      dbcon.query('CREATE TABLE IF NOT EXISTS users (id BIGINT AUTO_INCREMENT, 
-        name VARCHAR(255), password VARCHAR(255), email VARCHAR(255), 
-        createdAt DATETIME, balance FLOAT, sid VARCHAR(255), PRIMARY KEY(id))',
-        (err, rows, fields) ->
-          cb(null)
-      )
-    (cb) ->
-      # Create banker account if not existing
-      dbcon.query("SELECT id FROM users WHERE name='Banker' AND 
-        email='roastbanker@gmail.com'", (err, rows, fields) ->
-        if not rows? or not rows[0]?
-          console.log 'Banker does not exist yet, being created now...'
-          # Insert banker account
-          dbcon.query("INSERT INTO users (name, password, email, createdAt, 
-          balance) VALUES ('Banker', 'koffiekrag', 'roastbanker@gmail.com',
-          NOW(), 0.0)", (err, rows, fields) ->
-            dbcon.end()
-            cb(null)
-          )
-        else
-          dbcon.end()
-          cb(null)
-      )
-  ])
-
-extractSID = (cookie) ->
-  start = cookie.indexOf(':') + 1
-  end = cookie.indexOf('.')
-  return cookie.substring(start, end)
-
-module.exports.extractSID = extractSID
+module.exports.checkDBInit = (users) ->
+  email = 'roastbanker@gmail.com'
+  users.find({ where: {email:email} }).success((user) ->
+    if not user?
+      newUser = users.build({
+        name:'Banker',
+        email:'roastbanker@gmail.com'
+        password:'koffiekrag'
+        balance:0
+      })
+      newUser.save()
+  )
