@@ -5,6 +5,7 @@ MySqlSessionStore = require('connect-mysql-session')(express)
 
 # Internal imports
 utils = require('./utils')
+schema = require('./schema.coffee')
 
 # App settings
 app.set('views', './views/')
@@ -14,7 +15,8 @@ app.set('dbhost', 'localhost')
 app.set('dbname', 'roast')
 app.set('dbuser', 'roast')
 app.set('dbpass', 'Theansweris2442')
-app.engine('coffee', utils.coffeeEngine)
+app.set('coffee price', '2.6')
+app.engine('.coffee', utils.coffeecupEngine)
 app.use(express.cookieParser())
 app.use(express.session({
   secret:'randomCookieSecretPhrase',
@@ -24,47 +26,48 @@ app.use(express.session({
   })
 }))
 app.use(express.bodyParser())
-app.seq = utils.sequelize(app)
-app.users = utils.users(app.seq)
-app.coffees = utils.coffees(app.seq)
-app.purchases = utils.purchases(app.seq)
-app.payments = utils.payments(app.seq)
-app.seq.sync()
-utils.checkDBInit(app.users)
+app.use(express.static(__dirname + '/assets'))
 
-# Auth/Login route
-app.post('/auth', (req, res, next) ->
-  email = req.param('username', null)
-  pass = req.param('password', null)
-  app.users.find({ where: {email: email, password: pass} }).success((user) ->
-    if user?
-      id = user.id
-      sid = utils.extractSID(req.cookies['connect.sid'])
-      user.sid = sid
-      user.save(['sid']).success(() ->
-        res.redirect('/')
-      ).error((err) ->
-        res.redirect('/')
-      )
-    else
-      res.redirect('/')
-  ).error((err) ->
-    res.redirect('/')
-  )
+app.seq = schema.sequelize(app)
+app.users = schema.users(app.seq)
+app.coffees = schema.coffees(app.seq)
+app.purchases = schema.purchases(app.seq)
+app.payments = schema.payments(app.seq)
+app.seq.sync()
+schema.checkDBInit(app.users)
+
+# All authed users should be redirected to home instead of login/register
+app.all('/login', utils.skip(app.users), (req, res, next) ->
+  next()
+)
+app.all('/register', utils.skip(app.users), (req, res, next) ->
+  next()
+)
+app.all('/auth', utils.skip(app.users), (req, res, next) ->
+  next()
 )
 
-# All requests pass through here for authentication
+# Login and Registration routes
+require('./routes/auth')(app)
+
+# All other requests pass through here for authentication
 app.all('*', utils.restrict(app.users), (req, res, next) ->
    next()
 )
 
-# Import routes/resources
-require('./resources/users')(app)
-
-app.get('/partials/:view', (req, res, next) ->
-  params = req.params
-  res.render("partials/#{params.view}.coffee")
+# Route for fetching partials
+app.get('/partials/:item', (req, res, next) ->
+  res.render("partials/#{req.params.item}.coffee")
 )
+
+# Users resource route
+require('./routes/users')(app)
+
+# Home routes
+require('./routes/home')(app)
+
+# Coffees routes
+require('./routes/coffees')(app)
 
 # Start the app
 app.listen(3000)
