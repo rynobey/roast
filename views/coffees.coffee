@@ -8,20 +8,19 @@ html ->
     script src:'/partials/table'
     script src:'/js/jquery-ui.js'
     link rel:'stylesheet', href: '/css/jquery-ui.css'
-  body align:"center", ->
-    div align:"center", ->
-      h1 'Coffees'
-      if @msg?
-        p @msg
-    div align: "center", ->
-      form id: 'search-form', action: '/users/coffees', ->
-        div class: 'field', ->
-          label for: 'from', -> 'Date from: '
-          input type: 'text', id: 'fromdate', name: 'from'
-          label for: 'to', -> 'Date to: '
-          input type: 'text', id: 'todate', name: 'to'
-          button name: 'showCoffees', -> 'SHOW'
-    div id:'content-div', ->
+    link type:'text/css', rel:'stylesheet', href:'/css/stylesheet.css'
+  body ->
+    div class:'navbar', ->
+    div class:'page', ->
+      div class:'status', ->
+      div class:'content', ->
+        form id: 'search-form', action: '/users/coffees', ->
+          div class: 'field', ->
+            label for: 'from', -> 'Date from: '
+            input type: 'text', id: 'fromdate', name: 'from'
+            label for: 'to', -> 'Date to: '
+            input type: 'text', id: 'todate', name: 'to'
+            button name: 'showCoffees', -> 'SHOW'
 
 coffeescript ->
   dlData = {}
@@ -62,7 +61,8 @@ coffeescript ->
     $("#fromdate").datepicker("setDate", -7)
     $("#todate").datepicker({changeMonth: true, changeYear: true})
     $("#todate").datepicker("setDate", +1)
-    $($('div')[0]).append($(templates.navbar()))
+    $($('div')[0]).prepend($(templates.navbar()))
+    $('#coffeesbutton').toggleClass('selected')
     $($('#content-div')).append($(templates.table()))
     $.ajax({
       url: '/users/all'

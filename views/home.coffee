@@ -5,12 +5,13 @@ html ->
     script src:'/js/jquery-1.8.3.js'
     script src:'/partials/navbar'
     script src:'/partials/keyval'
-  body align: "center", ->
-    div align: "center", ->
-      h1 'Home'
-      if @msg?
-        p @msg
-    div align: "center", ->
+    script src:'/partials/status'
+    link type:'text/css', rel:'stylesheet', href:'/css/stylesheet.css'
+  body ->
+    div class:'navbar', ->
+    div class:'page', ->
+      div class:'status', ->
+      div class:'content', ->
       form action: '/users/coffees', method: 'post', ->
         div class: 'field', ->
           label for: 'params',  -> 'Qty: '
@@ -21,7 +22,9 @@ html ->
 
 coffeescript ->
   $(($) ->
-    $($('div')[0]).append($(templates.navbar()))
+    $('div.navbar').prepend($(templates.navbar()))
+    $('#homebutton').toggleClass('selected')
+    $('div.status').prepend($(templates.status()))
     $.ajax({
       url: '/users/all'
       success: (data) ->
