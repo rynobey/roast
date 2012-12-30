@@ -50,9 +50,13 @@ app.all('/auth', utils.skip(app.users), (req, res, next) ->
 # Login and Registration routes
 require('./routes/auth')(app)
 
-# All other requests pass through here for authentication
-app.all('*', utils.restrict(app.users), (req, res, next) ->
-   next()
+## All other requests pass through here for authentication
+#app.all('*', utils.restrict(app.users), (req, res, next) ->
+#   next()
+#)
+
+app.get('/index', (req, res, next) ->
+  res.render('index')
 )
 
 # Route for fetching partials

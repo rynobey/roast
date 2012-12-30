@@ -1,69 +1,64 @@
+* {
+  background-color: #E0C898;
+}
+
 .navbar {
   height: 100px;
-  width: 110%;
-  margin-left: -5%;
-  margin-top: -1%;
-  background-color: #000000;
+  width: 100%;
+  margin-left: 0px;
+  margin-top: -10px;
+  background-color: #302600;
 }
 
 .navbar .center {
   margin-left: auto;
   margin-right: auto;
-  width: 810px;
+  width: 800px;
   height: 100px;
-  display: block;
 }
 
 .navbar .button {
-  padding-top: 6px;
+  padding-top: 12px;
   height: 100px;
-  width: 135px;
+  width: 160px;
   border: 0px;
-  font-size: 1.2em;
-  font-weight: bold;
+  font-family: 'Great Vibes';
+  font-size: 35px;
   display: inline-block;
   cursor: pointer;
-  background-color: #000000;
-  color: #FFFFFF;
-}
-
-.navbar .button.selected {
-  padding-top: 6px;
-  height: 100px;
-  width: 135px;
-  border: 0px;
-  font-size: 1.2em;
-  font-weight: bold;
-  display: inline-block;
-  cursor: pointer;
-  background-color: #FFFFFF;
-  color: #000000;
-}
-
-.navbar .button.selected:hover {
-  padding-top: 6px;
-  height: 100px;
-  width: 135px;
-  border: 0px;
-  font-size: 1.2em;
-  font-weight: bold;
-  display: inline-block;
-  cursor: pointer;
-  background-color: #000000;
-  color: #FFFFFF;
+  background-color: #302600;
+  color: #E0C898;
+  transition: color 0.125s;
+  -moz-transition: color 0.125s; /* Firefox 4 */
+  -webkit-transition: color 0.125s; /* Safari and Chrome */
+  -o-transition: color 0.125s; /* Opera */
+  transition: background-color 0.125s;
+  -moz-transition: background-color 0.125s; /* Firefox 4 */
+  -webkit-transition: background-color 0.125s; /* Safari and Chrome */
+  -o-transition: background-color 0.125s; /* Opera */
 }
 
 .navbar .button:hover {
-  padding-top: 6px;
+  background-color: #E0C898;
+  color: #302600;
+}
+
+.navbar .button.selected {
+  padding-top: 12px;
   height: 100px;
-  width: 135px;
+  width: 160px;
   border: 0px;
-  font-size: 1.2em;
-  font-weight: bold;
+  font-family: 'Great Vibes';
+  font-size: 35px;
   display: inline-block;
   cursor: pointer;
-  background-color: #FFFFFF;
-  color: #000000;
+  background-color: #E0C898;
+  color: #302600;
+}
+
+.navbar .button.selected:hover {
+  background-color: #302600;
+  color: #E0C898;
 }
 
 .navbar .logo {
@@ -72,17 +67,119 @@
   display: inline-block;
 }
 
-.status {
+.navbar .title {
+  width: 800px;
+  height: 100px;
+  margin: 0px;
+  font-family: 'Great Vibes';
+  color;
+}
+
+.navbar .logo {
+  height: 100px;
   float: left;
-  width: 133px;
-  height: 200px;
-  background-color: wheat;
   display: inline-block;
 }
 
+.navbar .title {
+  width: 800px;
+  height: 100px;
+  margin: 0px;
+  font-family: 'Great Vibes';
+  color: #E0C898;
+  padding-top: 24px;
+  font-size: 55px;
+  text-align: center;
+  background-color: #302600;
+}
+
+.status {
+  float: left;
+  width: 135px;
+  height: 350px;
+  background-color: White;
+  display: inline-block;
+}
+
+.background {
+  margin: 0px;
+  width: 110%
+  max-height: 100%;
+  background-color: #E0C898;
+  display: none;
+}
+
 .page {
+  background-color: #E0C898;
   margin-left: auto;
   margin-right: auto;
-  width: 810px;
+  width: 800px;
+  max-height: 100%;
   display: block;
+}
+
+form.login-register input {
+  border: 1px solid #E0C898;
+  background-color: #E2DABB;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 288px;
+  height: 38px;
+  font-size: 23px;
+  font-family: serif;
+  text-align: center;
+  outline: none;
+  color: #302600;
+}
+
+form.login-register input.default {
+  color: #E0C898;
+}
+
+form.login-register button {
+  margin-top: 1px;
+  margin-left: 1px;
+  outline: 1px solid #E0C898;
+  border: 1px solid #E0C898;
+  background-color: #302600;
+  margin-right: auto;
+  width: 298px;
+  height: 43px;
+  font-family: 'Great Vibes';
+  color: #E0C898;
+  padding-top: 5px;
+  font-size: 30px;
+}
+
+form.login-register button:focus {
+  outline: 1px solid #E2DABB;
+  border: 0px;
+  padding-top: 6px;
+}
+
+form.login-register button:hover {
+  outline: 1px solid #E2DABB;
+  border: 0px;
+  padding-top: 6px;
+  cursor: pointer;
+}
+
+form.login-register.log {
+  background-color: #E0C898;
+  margin-left: auto;
+  margin-right: auto;
+  border: 50px solid #E0C898;
+  width: 300px;
+  height: 127px;
+}
+
+form.login-register.reg {
+  background-color: #E0C898;
+  margin-left: auto;
+  margin-right: auto;
+  border: 50px solid #E0C898;
+  width: 300px;
+  height: 167px;
 }
