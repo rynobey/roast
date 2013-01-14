@@ -1,38 +1,95 @@
+script src:'/partials/summary'
+script src:'/partials/loader'
+
 div class:'page', id:'page', ->
-  form action: '/users/coffees', method: 'post', ->
-    div class: 'field', ->
-      label for: 'params',  -> 'Qty: '
-      input type: 'number', id: 'params', name: 'params', value: '1'
-      input type: 'hidden', id: 'operation', name: 'operation', value: 'add'
-      input type: 'hidden', id: 'url', name: 'url', value: '/home'
-      button type: 'submit', -> 'ADD COFFEE'
+  div class: 'center small', ->
+    form class:'add-coffee', action: '/users/coffees', method: 'post', ->
+      span class:'space', -> 'Add Coffee'
+      span class:'input', ->
+        label for:'params', -> 'Qty:'
+        input type: 'text', id: 'params', name: 'params', value: '1'
+        input type: 'hidden', id: 'operation', name: 'operation', value: 'add'
+      button type: 'button',-> 'Submit'
+  div class: 'center small', ->
+    span class:'space', -> 'Stats'
+    br()
+    span id:'summary', ->
 
 coffeescript ->
+  timeout = 0
+  statusData = {}
+  processResponse = (data) ->
+    console.log data.currentUrl
+    if data.success
+      console.log data
+      if data.redirect?
+        $.bbq.pushState({url:data.redirect})
+        $(window).trigger('hashChange')
+      if data.reload?
+        $.bbq.pushState({url:data.currentUrl})
+        $(window).trigger('hashChange')
+
+  restoreStats = () ->
+    timeout = 0
+    $.unblockUI({fadeOut:100})
+    action()
+
+  action = () ->
+    if statusData? and statusData.balance? and statusData.totSpent?
+      $('span#summary').replaceWith(templates.summary({
+        balance:statusData.balance,
+        totSpent:statusData.totSpent,
+        totCoffees:statusData.totCoffees
+      }))
+    else
+      $('span#summary').replaceWith(templates.summary({
+        balance:'-',
+        totSpent:'-',
+        totCoffees:'-'
+      }))
+    $('form.add-coffee button').bind('click', (e) ->
+      buttonEvent()
+    )
+
+  loadStatus = () ->
+    $.ajax({
+      url: '/users/summary'
+      success: (data) ->
+        statusData = data
+        setTimeout(restoreStats, timeout)
+      error: () ->
+        setTimeout(restoreStats, timeout)
+      dataType: 'json'
+    })
+
+  buttonEvent = () ->
+    $('form.add-coffee button').unbind('click')
+    timeout = 500
+    $.blockUI({
+      fadeIn: 100,
+      message: $(templates.loader()),
+      css: {
+        left: '48%',
+        width: '0px',
+        opacity: 0.6,
+        border: '0px',
+        color: '#FFFFFF'
+      }
+    })
+    $.post('/users/coffees', $('form.add-coffee').serialize(), (data) ->
+      loadStatus()
+    )
+
   $(($) ->
-    #$('div.navbar').prepend($(templates.navbar()))
-    #$('#homebutton').toggleClass('selected')
-    #$('div.status').prepend($(templates.status()))
-    #$.ajax({
-    #  url: '/users/all'
-    #  success: (data) ->
-    #    $($('div')[0]).append(
-    #      $(templates.keyval({
-    #        key: "Logged in as "
-    #        val: data.name
-    #      }))
-    #    )
-    #    $($('div')[0]).append(
-    #      $(templates.keyval({
-    #        key: "Your credit balance is: R "
-    #        val: data.balance
-    #      }))
-    #    )
-    #    $($('div')[0]).append(
-    #      $(templates.keyval({
-    #        key: "Total number of coffees consumed: "
-    #        val: data.coffees.length
-    #      }))
-    #    )
-    #  dataType: 'json'
-    #})
+    $('input#params').attr('autocomplete', 'off')
+    loadStatus()
+    $('div.center span.input').on('click', () ->
+      $('div.center input#params').focus()
+    )
+    $('form.add-payment button').click((e) ->
+      e.preventDefault()
+      $.post('/users/payments', $('form.add-payment').serialize(), (data) ->
+        processResponse(data)
+      )
+    )
   )

@@ -32,8 +32,16 @@ module.exports.users = (sequelize) ->
         isEmpty:false,
       }
     },
-    balance: Sequelize.FLOAT,
-    sid: Sequelize.STRING
+    balance: {
+      type:Sequelize.FLOAT,
+      defaultValue:0,
+      allowNull:false
+    },
+    sid: Sequelize.STRING,
+    type: {
+      type:Sequelize.STRING,
+      defaultValue:0
+    }
   })
   return users
 
@@ -44,7 +52,7 @@ module.exports.coffees = (sequelize) ->
       primaryKey:true,
       autoIncrement:true
     },
-    consumedByID: Sequelize.INTEGER
+    consumedByID: Sequelize.INTEGER,
     cost: Sequelize.FLOAT
   })
   return coffees
@@ -57,6 +65,9 @@ module.exports.purchases = (sequelize) ->
       autoIncrement:true
     },
     purchasedByID: Sequelize.INTEGER,
+    type: Sequelize.STRING,
+    amount: Sequelize.STRING,
+    cost: Sequelize.FLOAT,
     description: Sequelize.STRING
   })
   return purchases
@@ -68,7 +79,14 @@ module.exports.payments = (sequelize) ->
       primaryKey:true,
       autoIncrement:true
     },
-    paymentByID: Sequelize.INTEGER
+    amount: Sequelize.FLOAT,
+    paymentByID: Sequelize.INTEGER,
+    reference: Sequelize.STRING,
+    note: Sequelize.TEXT,
+    confirmed: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false
+    }
   })
   return payments
 
@@ -78,9 +96,10 @@ module.exports.checkDBInit = (users) ->
     if not user?
       newUser = users.build({
         name:'Banker',
-        email:'roastbanker@gmail.com'
-        password:'koffiekrag'
-        balance:0
+        email:'roastbanker@gmail.com',
+        password:'koffiekrag',
+        balance:0,
+        type:1
       })
       newUser.save()
   )

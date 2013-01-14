@@ -3,6 +3,31 @@ utils = require('../utils')
 # Export the routes
 module.exports = ((app) ->
 
+  # All authed users should be redirected to home instead of login/register
+  app.all('/outdex', utils.skip(app.users), (req, res, next) ->
+    next()
+  )
+
+  app.all('/login', utils.skip(app.users), (req, res, next) ->
+    next()
+  )
+
+  app.all('/register', utils.skip(app.users), (req, res, next) ->
+    next()
+  )
+
+  app.all('/auth', utils.skip(app.users), (req, res, next) ->
+    next()
+  )
+
+  app.get('/', (req, res,next) ->
+    res.redirect('/index')
+  )
+
+  app.get('/outdex', (req, res,next) ->
+    res.render('outdex')
+  )
+
   app.get('/login', (req, res, next) ->
     msg = app.locals.dispMsg
     if msg? and msg isnt ''
@@ -22,51 +47,55 @@ module.exports = ((app) ->
   )
 
   app.post('/register', (req, res, next) ->
-    name = req.param('name', null)
-    email = req.param('email', null)
-    pass = req.param('password', null)
-    app.users.find({ where: {email:email} }).success((user) ->
-      console.log user
-      console.log user?
+    n = req.param('name', null)
+    e = req.param('email', null)
+    p = req.param('password', null)
+    app.users.find({ where: {email:e} }).success((user) ->
       if not user?
-        newUser = app.users.build({
-          name:name,
-          email:email
-          password:pass
-          balance:0
-        })
-        newUser.save()
-        # authenticate
-        app.locals.dispMsg = 'Registration Successful! Sign in using your details.'
-        res.redirect('/login')
+        app.users.build({name:n, email:e, password:p, balance:0}).save()
+        app.locals.dispMsg = """
+          Registration Successful! Sign in using your details:
+        """
+        res.redirect('/outdex#url=/login')
       else
-        res.render('register', {msg: 'That email is already registered!'})
+        app.locals.dispMsg = """
+          Registration Failed! That e-mail address has already been registered.
+        """
+        res.redirect('/outdex#url=/register')
     ).error((err) ->
-      res.render('register', {msg: err})
+      app.locals.dispMsg = """
+        Oops! Something went wrong... Hopefully it doesn't happen again...
+      """
+      res.redirect('/outdex#url=/register')
     )
   )
 
   # Auth/Login route
   app.post('/auth', (req, res, next) ->
-    email = req.param('email', null)
-    pass = req.param('password', null)
-    app.users.find({ where: {email: email, password: pass} }).success((user) ->
+    e = req.param('email', null)
+    p = req.param('password', null)
+    app.users.find({ where: {email: e, password: p} }).success((user) ->
       if user?
         sid = utils.extractSID(req.cookies['connect.sid'])
         user.sid = sid
         user.save(['sid']).success(() ->
-          app.locals.dispMsg = 'Welcome to Roast!'
-          res.redirect('/')
+          req.user = user
+          app.locals.dispMsg = ''
+          res.redirect('/index#url=/home')
         ).error((err) ->
-          app.locals.dispMsg = err
-          res.redirect('/login')
+          app.locals.dispMsg = """
+            Oops! Something went wrong... Hopefully it doesn't happen again...
+          """
+          res.redirect('/outdex#url=/login')
         )
       else
         app.locals.dispMsg = 'Incorrect e-mail or password'
-        res.redirect('/login')
+        res.redirect('/outdex#url=/login')
     ).error((err) ->
-      app.locals.dispMsg = err
-      res.redirect('/login')
+      app.locals.dispMsg = """
+        Oops! Something went wrong... Hopefully it doesn't happen again...
+      """
+      res.redirect('/outdex#url=/login')
     )
   )
 
@@ -76,16 +105,25 @@ module.exports = ((app) ->
       if user?
         user.sid = ''
         user.save(['sid']).success(() ->
-          res.redirect('/login')
+          res.redirect('/outdex#url=/login')
         ).error((err) ->
-          app.locals.dispMsg = err
+          app.locals.dispMsg = """
+            Oops! Something went wrong... Hopefully it doesn't happen again...
+          """
           res.redirect('/')
         )
       else
         res.redirect('/')
     ).error((err) ->
-      app.locals.dispMsg = err
+      app.locals.dispMsg = """
+        Oops! Something went wrong... Hopefully it doesn't happen again...
+      """
       res.redirect('/')
     )
+  )
+
+  # All other requests pass through here for authentication
+  app.all('*', utils.restrict(app.users), (req, res, next) ->
+     next()
   )
 )

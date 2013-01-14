@@ -5,20 +5,20 @@ html ->
     link type:'text/css', rel:'stylesheet', href:'/css/jquery-ui.css'
     link type:'text/css', rel:'stylesheet', href:'/css/stylesheet.css'
     #link type:"text/css", rel:"stylesheet", href:'/css/fonts.css'
-    link type:"text/css", rel:"stylesheet", href:"http://fonts.googleapis.com/css?family=Jacques+Francois+Shadow"
-    link type:"text/css", rel:"stylesheet", href:"http://fonts.googleapis.com/css?family=Jacques+Francois"
-    link type:"text/css", rel:"stylesheet", href:"http://fonts.googleapis.com/css?family=Droid+Serif"
+    link type:"text/css", rel:"stylesheet", href:"/css/fonts/stylesheet.css"
+    #link type:"text/css", rel:"stylesheet", href:"http://fonts.googleapis.com/css?family=Jacques+Francois+Shadow"
+    #link type:"text/css", rel:"stylesheet", href:"http://fonts.googleapis.com/css?family=Jacques+Francois"
+    #link type:"text/css", rel:"stylesheet", href:"http://fonts.googleapis.com/css?family=Droid+Serif"
     script src:'/js/jquery-1.8.3.min.js'
     script src:'/js/jquery.ba-bbq.min.js'
     script src:'/js/jquery-ui.js'
-    script src:'/js/block-ui.js'
   body class:'background', ->
     div class:'navbar', ->
       div class:'center', ->
         div class:'left', style:'visibility:hidden;',  -> 'Roast'
-        button class:'navbar', id:'homebutton', href: "/home", -> 'Home'
-        button class:'navbar', id:'historybutton', href: "/history", -> 'History'
-        div class:'right',  ->
+        button class:'navbar', id:'loginbutton', href: "/login", -> 'Login'
+        button class:'navbar', id:'registerbutton', href: "/register", -> 'Register'
+        div class:'right', style:'visibility:hidden;',  ->
           a href:'/deauth', -> 'Logout'
     div class:'page', id:'page', ->
 
@@ -54,9 +54,9 @@ coffeescript ->
   $(($) ->
     change = (fromButton) ->
       url = $.bbq.getState('url')
-      if not url? or url is '/' or not url or (url is '/login' or url is '/register')
-        $.bbq.pushState({url:'/home'})
-        url = '/home'
+      if not url? or not url or (url isnt '/login' and url isnt '/register')
+        $.bbq.pushState({url:'/login'})
+        url = '/login'
       if fromButton? and not fromButton
         $("button[href='#{url}']").addClass('selected')
       $('#page').contentLoad(url)

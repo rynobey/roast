@@ -1,33 +1,68 @@
-* {
-  background-color: #E0C898;
+body.background {
+  margin: 0px;
+  width: 110%
+  max-height: 100%;
+  background-color: #DED3AD;
+  display: none;
 }
 
-.navbar {
+div.navbar {
   height: 100px;
   width: 100%;
   margin-left: 0px;
   margin-top: -10px;
-  background-color: #302600;
+  background-color: #231A00;
 }
 
-.navbar .center {
+div.navbar>div.center {
+  width: 900px;
+  height: 100px;
   margin-left: auto;
   margin-right: auto;
-  width: 800px;
-  height: 100px;
+  background-color: #231A00;
 }
 
-.navbar .button {
-  padding-top: 12px;
-  height: 100px;
-  width: 160px;
+div.navbar>div.center>div.left {
+  height: 40px;
+  width: 150px;
+  font-size: 25px;
   border: 0px;
+  display: inline-block;
+  background-color: #231A00;
+  color: #DED3AD;
   font-family: 'Great Vibes';
-  font-size: 35px;
+  text-align: center;
+}
+
+div.navbar>div.center>div.right {
+  height: 40px;
+  width: 150px;
+  border: 0px;
+  display: inline-block;
+  background-color: #231A00;
+  color: #DED3AD;
+  font-family: 'Great Vibes';
+  text-align: center;
+}
+
+div.navbar>div.center>div.right>a {
+  color: #DED3AD;
+  background-color: #231A00;
+  font-family: 'jacques_francoisregular';
+  font-size: 20px;
+}
+
+div.navbar>div.center>button.navbar {
+  padding-top: 8px;
+  height: 100px;
+  width: 300px;
+  border: 0px;
+  font-family: 'jacques_francois_shadowRg';
+  font-size: 55px;
   display: inline-block;
   cursor: pointer;
-  background-color: #302600;
-  color: #E0C898;
+  background-color: #231A00;
+  color: #DED3AD;
   transition: color 0.125s;
   -moz-transition: color 0.125s; /* Firefox 4 */
   -webkit-transition: color 0.125s; /* Safari and Chrome */
@@ -38,148 +73,392 @@
   -o-transition: background-color 0.125s; /* Opera */
 }
 
-.navbar .button:hover {
-  background-color: #E0C898;
-  color: #302600;
-}
-
-.navbar .button.selected {
-  padding-top: 12px;
+div.navbar>div.center>button.navbar:hover {
   height: 100px;
-  width: 160px;
-  border: 0px;
-  font-family: 'Great Vibes';
-  font-size: 35px;
-  display: inline-block;
-  cursor: pointer;
-  background-color: #E0C898;
-  color: #302600;
+  background-color: #DED3AD;
+  color: #231A00;
 }
 
-.navbar .button.selected:hover {
-  background-color: #302600;
-  color: #E0C898;
-}
-
-.navbar .logo {
+div.navbar>div.center>button.navbar:focus {
   height: 100px;
-  float: left;
-  display: inline-block;
+  background-color: #DED3AD;
+  color: #231A00;
 }
 
-.navbar .title {
-  width: 800px;
+div.navbar>div.center>button.navbar.selected {
   height: 100px;
-  margin: 0px;
-  font-family: 'Great Vibes';
-  color;
+  background-color: #DED3AD;
+  color: #231A00;
 }
 
-.navbar .logo {
-  height: 100px;
-  float: left;
-  display: inline-block;
-}
-
-.navbar .title {
-  width: 800px;
-  height: 100px;
-  margin: 0px;
-  font-family: 'Great Vibes';
-  color: #E0C898;
-  padding-top: 24px;
-  font-size: 55px;
-  text-align: center;
-  background-color: #302600;
-}
-
-.status {
-  float: left;
-  width: 135px;
-  height: 350px;
-  background-color: White;
-  display: inline-block;
-}
-
-.background {
-  margin: 0px;
-  width: 110%
-  max-height: 100%;
-  background-color: #E0C898;
-  display: none;
-}
-
-.page {
-  background-color: #E0C898;
+div.page {
+  background-color: #DED3AD;
   margin-left: auto;
   margin-right: auto;
-  width: 800px;
-  max-height: 100%;
+  width: 600px;
+  height: 500px;
   display: block;
+  box-shadow: 0px 0px 10px 2px #231A00;
 }
 
-form.login-register input {
-  border: 1px solid #E0C898;
-  background-color: #E2DABB;
+div.page>div.msgbox {
+  padding-top: 35px;
+  margin-bottom: -35px;
+  height: 100px;
+  width: 600px;
+  display: block;
+  font-size: 20px;
+  text-align: center;
+  font-family: 'jacques_francoisregular';
+}
+
+div.page>div.statusbox {
+  height: 100px;
+  width: 600px;
+  display: block;
+  font-size: 20px;
+  text-align: center;
+  font-family: 'jacques_francoisregular';
+}
+
+div.page>form.login-register {
+  padding-right:12.5px;
+  padding-left:12.5px;
+  background-color: #DED3AD;
+  border: 0px;
+  width: 275px;
+  height: 167px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.page>form.login-register>input {
+  border: 1px solid #DED3AD;
+  background-color: #EAE6D0;
   margin-left: auto;
   margin-right: auto;
   padding-left: 5px;
   padding-right: 5px;
-  width: 288px;
+  width: 263px;
   height: 38px;
-  font-size: 23px;
-  font-family: serif;
+  font-size: 20px;
+  font-family: 'jacques_francoisregular';
   text-align: center;
   outline: none;
-  color: #302600;
+  color: #231A00;
+  box-shadow: 0px 0px 2px 1px #DED3AD inset;
 }
 
-form.login-register input.default {
-  color: #E0C898;
+div.page>form.login-register>input.default {
+  color: #D6C999;
 }
 
-form.login-register button {
+div.page>form.login-register>button {
   margin-top: 1px;
   margin-left: 1px;
-  outline: 1px solid #E0C898;
-  border: 1px solid #E0C898;
-  background-color: #302600;
+  outline: 1px solid #DED3AD;
+  border: 1px solid #DED3AD;
+  background-color: #231A00;
   margin-right: auto;
-  width: 298px;
+  width: 273px;
   height: 43px;
-  font-family: 'Great Vibes';
-  color: #E0C898;
-  padding-top: 5px;
-  font-size: 30px;
+  font-family: 'jacques_francoisregular';
+  color: #DED3AD;
+  font-size: 20px;
 }
 
-form.login-register button:focus {
-  outline: 1px solid #E2DABB;
+div.page>form.login-register>button:focus {
+  outline: 1px solid #EAE6D0;
   border: 0px;
-  padding-top: 6px;
 }
 
-form.login-register button:hover {
-  outline: 1px solid #E2DABB;
+div.page>form.login-register>button:hover {
+  outline: 1px solid #EAE6D0;
   border: 0px;
-  padding-top: 6px;
   cursor: pointer;
 }
 
-form.login-register.log {
-  background-color: #E0C898;
-  margin-left: auto;
-  margin-right: auto;
-  border: 50px solid #E0C898;
-  width: 300px;
-  height: 127px;
+div.page>div.left {
+  margin-right:12.5px;
+  margin-left:12.5px;
+  background-color: #DED3AD;
+  border: 0px;
+  width: 275px;
+  height: 167px;
+  float: left;
+  display: inline-block;
 }
 
-form.login-register.reg {
-  background-color: #E0C898;
+div.page>div.right {
+  margin-right:12.5px;
+  margin-left:12.5px;
+  background-color: #DED3AD;
+  border: 0px;
+  width: 275px;
+  height: 167px;
+  float: right;
+  display: inline-block;
+}
+
+div.page>div.center {
+  margin-right: auto;
+  margin-left: auto;
+  width: 300px;
+  background-color: #DED3AD;
+  border: 0px;
+  display: block;
+}
+
+div.page>div.center.small {
+  padding-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 275px;
+  background-color: #DED3AD;
+  border: 0px;
+  display: block;
+}
+
+div.page>div.center.medium {
+  padding-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 425px;
+  background-color: #DED3AD;
+  border: 0px;
+  display: block;
+}
+
+div.page>div>div.info {
+  padding-top: 10px;
+  padding-left: 12.5px;
+  padding-right: 12.5px;
+  font-size: 18px;
+  font-family: 'jacques_francoisregular';
+}
+
+div.page form label {
+  height: 28px;
+  background-color: #EAE6D0;
+  color: #231A00;
+  display: inline-block;
+  border: 0px;
+  outline: none;
+  padding-left: 5px;
+}
+
+div.page form.add-coffee input {
+  border: 0px;
+  background-color: #EAE6D0;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 38px;
+  height: 26px;
+  font-size: 20px;
+  font-family: 'droid_serifregular';
+  text-align: right;
+  outline: none;
+  color: #231A00;
+  display: inline-block;
+}
+
+div.page form.add-coffee button {
+  margin-top: 1px;
+  margin-left: 1px;
+  outline: 1px solid #DED3AD;
+  border: 1px solid #DED3AD;
+  background-color: #231A00;
+  margin-right: auto;
+  width: 273px;
+  height: 43px;
+  font-family: 'jacques_francoisregular';
+  color: #DED3AD;
+  font-size: 20px;
+}
+
+div.page form.add-coffee button:focus {
+  outline: 1px solid #EAE6D0;
+  border: 0px;
+}
+
+div.page form.add-coffee button:hover {
+  outline: 1px solid #EAE6D0;
+  border: 0px;
+  cursor: pointer;
+}
+
+div.page table.stock {
   margin-left: auto;
   margin-right: auto;
-  border: 50px solid #E0C898;
-  width: 300px;
-  height: 167px;
+  margin-top: 10px;
+  background-color: #EAE6D0;
+  border-collapse: collapse;
+  box-shadow: 0px 0px 2px 1px #EAE6D0;
+}
+
+div.page table.stock td {
+  padding-left: 5px;
+  font-size: 20px;
+  background-color: #EAE6D0;
+  font-family: 'jacques_francoisregular';
+  text-align: center;
+  color: #231A00;
+  width: 91px;
+}
+
+div.page form.add-stock input {
+  width: 91px;
+  border: 0px;
+  background-color: #DED3AD;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 5px;
+  padding-right: 15px;
+  height: 26px;
+  font-size: 20px;
+  font-family: 'droid_serifregular';
+  text-align: right;
+  outline: none;
+  color: #231A00;
+  display: inline-block;
+  box-shadow: 0px 0px 1px 1px #EAE6D0 inset;
+}
+
+div.page form.add-stock input.stock-cost {
+  width: 70px;
+  border: 0px;
+  background-color: #DED3AD;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 5px;
+  padding-right: 0px;
+  height: 22px;
+  font-size: 20px;
+  font-family: 'droid_serifregular';
+  text-align: right;
+  outline: none;
+  color: #231A00;
+  display: inline-block;
+  box-shadow: 0px 0px 0px 0px #EAE6D0 inset;
+}
+
+div.page form.add-stock span.stock-cost {
+  width: 95px;
+  height: 26px;
+  display: inline-block;
+  padding-left: 7px;
+  margin-right: 3px;
+  font-size: 20px;
+  text-align: left;
+  background-color: #DED3AD;
+  box-shadow: 0px 0px 1px 1px #EAE6D0 inset;
+}
+
+div.page form.add-stock button {
+  margin-top: 2px;
+  margin-left: auto;
+  outline: 1px solid #DED3AD;
+  border: 1px solid #DED3AD;
+  background-color: #231A00;
+  margin-right: auto;
+  width: 423px;
+  height: 43px;
+  font-family: 'jacques_francoisregular';
+  color: #DED3AD;
+  font-size: 20px;
+  display: block;
+}
+
+div.page form.add-stock button:focus {
+  outline: 1px solid #EAE6D0;
+  border: 0px;
+}
+
+div.page form.add-stock button:hover {
+  outline: 1px solid #EAE6D0;
+  border: 0px;
+  cursor: pointer;
+}
+
+div.page form.add-stock select, div.page form.add-stock select:active {
+  background-color: #D6C999;
+  overflow: hidden;
+  width: 90px;
+  height: 25px;
+  font-family: 'jacques_francoisregular';
+  font-size: 18px;
+  color: #231A00;
+  outline: none;
+  border: 0px;
+  margin-bottom: 1px;
+}
+
+div.page table.summary {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  background-color: #EAE6D0;
+  border-collapse: collapse;
+  box-shadow: 0px 0px 2px 1px #EAE6D0;
+}
+
+table.summary td.key {
+  padding-left: 5px;
+  font-size: 20px;
+  background-color: #EAE6D0;
+  font-family: 'jacques_francoisregular';
+  text-align: left;
+  color: #231A00;
+  width: 190px;
+}
+
+table.summary td.unit {
+  font-size: 20px;
+  background-color: #EAE6D0;
+  font-family: 'jacques_francoisregular';
+  text-align: left;
+  color: #231A00;
+  width: 10px;
+}
+
+table.summary td.value {
+  font-size: 20px;
+  background-color: #EAE6D0;
+  font-family: 'droid_serifregular';
+  text-align: center;
+  color: #231A00;
+  width: 73px;
+}
+
+div.page div.small span {
+  width: 275px;
+  font-size: 35px;
+  font-family: 'jacques_francoisregular';
+  text-align: center;
+  display: inline-block;
+  color: #231A00;
+}
+
+div.page>div.center.medium>form.add-stock>span {
+  width: 425px;
+  font-size: 35px;
+  font-family: 'jacques_francoisregular';
+  text-align: center;
+  display: inline-block;
+  color: #231A00;
+}
+
+div.page form span.input {
+  width: 275px;
+  height: 33px;
+  padding-top: 7px;
+  margin-top: 10px;
+  font-size: 20px;
+  font-family: 'jacques_francoisregular';
+  text-align: center;
+  display: inline-block;
+  background-color: #EAE6D0;
+  box-shadow: 0px 0px 2px 1px #DED3AD inset;
 }

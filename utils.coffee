@@ -2,15 +2,14 @@
 fs = require('fs')
 p = require('path')
 cc = require('coffeecup')
-$ = require('jquery')
 
 extractSID = (cookie) ->
   start = cookie.indexOf(':') + 1
   end = cookie.indexOf('.')
   return cookie.substring(start, end)
 
-## Function exports
 
+## Function exports
 module.exports.extractSID = extractSID
 
 module.exports.isNumber = (o) ->
@@ -21,7 +20,6 @@ module.exports.coffeecupEngine = (path, options, cb) ->
     if (err) then return cb(err)
     tpl = cc.compile(str, options.settings['view options'])
     if path.indexOf('partials') > 0
-      # Render templates in partial folders as functions                        
       root = 'templates'
       templateName = p.basename(path, p.extname(path))
       output = """
@@ -32,7 +30,6 @@ module.exports.coffeecupEngine = (path, options, cb) ->
       """
       cb(null, output)
     else
-      # Regular templates are rendered to html                                  
       try
         str = tpl(options)
         cb(null, str)
@@ -42,26 +39,29 @@ module.exports.coffeecupEngine = (path, options, cb) ->
 
 module.exports.restrict = (users) ->
   return (req, res, next) ->
-    if req? and req.cookies? and req.cookies['connect.sid']?
-      sid = extractSID(req.cookies['connect.sid'])
+    cookies = req.cookies
+    if req? and cookies? and cookies['connect.sid']?
+      sid = extractSID(cookies['connect.sid'])
       users.find({ where: {sid: sid} }).success((user) ->
         if user?
+          req.user = user
           return next()
         else
-          res.render('login')
+          res.redirect('/outdex#url=/login')
       ).error((err) ->
-        res.render('login')
+        res.redirect('/outdex#url=/login')
       )
     else
-      res.render('login')
+      res.redirect('/outdex#url=/login')
 
 module.exports.skip = (users) ->
   return (req, res, next) ->
-    if req? and req.cookies? and req.cookies['connect.sid']?
-      sid = extractSID(req.cookies['connect.sid'])
+    cookies = req.cookies
+    if req? and cookies? and cookies['connect.sid']?
+      sid = extractSID(cookies['connect.sid'])
       users.find({ where: {sid: sid} }).success((user) ->
         if user?
-          res.redirect('/')
+          res.redirect('/index#url=/home')
         else
           return next()
       ).error((err) ->
