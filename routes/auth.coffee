@@ -49,10 +49,10 @@ module.exports = ((app) ->
   app.post('/register', (req, res, next) ->
     n = req.param('name', null)
     e = req.param('email', null)
-    p = req.param('password', null)
+    h = req.param('hash', null)
     app.users.find({ where: {email:e} }).success((user) ->
       if not user?
-        app.users.build({name:n, email:e, password:p, balance:0}).save()
+        app.users.build({name:n, email:e, password:h, balance:0}).save()
         app.locals.dispMsg = """
           Registration Successful! Sign in using your details:
         """
@@ -73,8 +73,8 @@ module.exports = ((app) ->
   # Auth/Login route
   app.post('/auth', (req, res, next) ->
     e = req.param('email', null)
-    p = req.param('password', null)
-    app.users.find({ where: {email: e, password: p} }).success((user) ->
+    h = req.param('hash', null)
+    app.users.find({ where: {email: e, password: h} }).success((user) ->
       if user?
         sid = utils.extractSID(req.cookies['connect.sid'])
         user.sid = sid

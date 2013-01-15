@@ -18,13 +18,13 @@ div class:'page', id:'page', ->
               option value:'Milk', -> 'Milk'
               option value:'Sugar', -> 'Sugar'
           td ->
-            input type: 'text', id:'amount', name:'amount', value:'1'
+            input type: 'text', id:'amount', name:'amount', value:'1', onkeypress:"return event.keyCode!=13;"
           td class:'unit-value', ->
             'kg'
           td ->
             span class:'stock-cost', ->
               text 'R'
-              input class:'stock-cost', type:'text', id:'cost', name:'cost', value:'0'
+              input class:'stock-cost', type:'text', id:'cost', name:'cost', value:'0', onkeypress:"return event.keyCode!=13;"
       input type: 'hidden', id: 'type', name: 'type', value: 'Coffee'
       input type: 'hidden', id: 'operation', name: 'operation', value: 'add'
       button type: 'button',-> 'Submit'

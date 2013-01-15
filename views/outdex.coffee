@@ -4,14 +4,12 @@ html ->
     title 'Roast::Index'
     link type:'text/css', rel:'stylesheet', href:'/css/jquery-ui.css'
     link type:'text/css', rel:'stylesheet', href:'/css/stylesheet.css'
-    #link type:"text/css", rel:"stylesheet", href:'/css/fonts.css'
     link type:"text/css", rel:"stylesheet", href:"/css/fonts/stylesheet.css"
-    #link type:"text/css", rel:"stylesheet", href:"http://fonts.googleapis.com/css?family=Jacques+Francois+Shadow"
-    #link type:"text/css", rel:"stylesheet", href:"http://fonts.googleapis.com/css?family=Jacques+Francois"
-    #link type:"text/css", rel:"stylesheet", href:"http://fonts.googleapis.com/css?family=Droid+Serif"
     script src:'/js/jquery-1.8.3.min.js'
     script src:'/js/jquery.ba-bbq.min.js'
     script src:'/js/jquery-ui.js'
+    script type:'text/javascript', src:'/js/sha1.js'
+
   body class:'background', ->
     div class:'navbar', ->
       div class:'center', ->
@@ -24,9 +22,7 @@ html ->
 
 coffeescript ->
   processResponse = (data) ->
-    console.log data.currentUrl
     if data.success
-      console.log data
       if data.redirect?
         $.bbq.pushState({url:data.redirect})
         $(window).trigger('hashChange')

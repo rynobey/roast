@@ -4,10 +4,7 @@ html ->
     title 'Roast::Index'
     link type:'text/css', rel:'stylesheet', href:'/css/jquery-ui.css'
     link type:'text/css', rel:'stylesheet', href:'/css/stylesheet.css'
-    #link type:"text/css", rel:"stylesheet", href:'/css/fonts.css'
-    link type:"text/css", rel:"stylesheet", href:"http://fonts.googleapis.com/css?family=Jacques+Francois+Shadow"
-    link type:"text/css", rel:"stylesheet", href:"http://fonts.googleapis.com/css?family=Jacques+Francois"
-    link type:"text/css", rel:"stylesheet", href:"http://fonts.googleapis.com/css?family=Droid+Serif"
+    link type:"text/css", rel:"stylesheet", href:"/css/fonts/stylesheet.css"
     script src:'/js/jquery-1.8.3.min.js'
     script src:'/js/jquery.ba-bbq.min.js'
     script src:'/js/jquery-ui.js'
@@ -55,10 +52,13 @@ coffeescript ->
     change = (fromButton) ->
       url = $.bbq.getState('url')
       if not url? or url is '/' or not url or (url is '/login' or url is '/register')
-        $.bbq.pushState({url:'/home'})
-        url = '/home'
+        $.bbq.pushState({url:'/home/add-coffee'})
+        url = '/home/add-coffee'
       if fromButton? and not fromButton
-        $("button[href='#{url}']").addClass('selected')
+        if url.indexOf('/home') is 0
+          $("button#homebutton").addClass('selected')
+        else if url.indexOf('/history') is 0
+          $("button#historybutton").addClass('selected')
       $('#page').contentLoad(url)
 
     $(window).bind('hashChange', change)

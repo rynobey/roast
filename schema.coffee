@@ -97,7 +97,7 @@ module.exports.checkDBInit = (users) ->
       newUser = users.build({
         name:'Banker',
         email:'roastbanker@gmail.com',
-        password:'koffiekrag',
+        password:'c40b331003356d4e85272ac4286fe12602dd1eb2'
         balance:0,
         type:1
       })

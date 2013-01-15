@@ -89,13 +89,13 @@ module.exports = ((app) ->
             amount: params
           })
           payment.save().success(() ->
-            user.balance = user.balance + params
+            user.balance = user.balance + parseFloat(params)
             user.save(['balance']).success(() ->
-              res.json({success: true ,reload: true})
+              res.json({success: true})
             )
           )
         else
-          res.json({success: true ,reload: true})
+          res.json({success: true})
     )
   )
 

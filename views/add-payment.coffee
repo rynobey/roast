@@ -3,11 +3,11 @@ script src:'/partials/loader'
 
 div class:'page', id:'page', ->
   div class: 'center small', ->
-    form class:'add-coffee', action: '/users/coffees', method: 'post', ->
-      span class:'space', -> 'Add Coffee'
+    form class:'add-coffee', action: '/users/payments', method: 'post', ->
+      span class:'space', -> 'Add Payment'
       span class:'input', ->
-        label for:'params', -> 'Qty:'
-        input type: 'text', id: 'params', name: 'params', value: '1'
+        label for:'params', -> 'R'
+        input type: 'text', id: 'params', name: 'params', value: '0', onkeypress:"return event.keyCode != 13;"
         input type: 'hidden', id: 'operation', name: 'operation', value: 'add'
       button type: 'button',-> 'Submit'
   div class: 'center small', ->
@@ -76,7 +76,7 @@ coffeescript ->
         color: '#FFFFFF'
       }
     })
-    $.post('/users/coffees', $('form.add-coffee').serialize(), (data) ->
+    $.post('/users/payments', $('form.add-coffee').serialize(), (data) ->
       loadStatus()
     )
 
@@ -85,11 +85,5 @@ coffeescript ->
     loadStatus()
     $('div.center span.input').on('click', () ->
       $('div.center input#params').focus()
-    )
-    $('form.add-payment button').click((e) ->
-      e.preventDefault()
-      $.post('/users/payments', $('form.add-payment').serialize(), (data) ->
-        processResponse(data)
-      )
     )
   )
