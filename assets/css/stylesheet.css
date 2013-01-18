@@ -2,7 +2,8 @@ body.background {
   margin: 0px;
   width: 110%
   max-height: 100%;
-  background-color: #DED3AD;
+  background-color: #231A00;
+  /*background-color: #DED3AD;*/
   display: none;
 }
 
@@ -15,7 +16,7 @@ div.navbar {
 }
 
 div.navbar>div.center {
-  width: 900px;
+  width: 901px;
   height: 100px;
   margin-left: auto;
   margin-right: auto;
@@ -91,14 +92,69 @@ div.navbar>div.center>button.navbar.selected {
   color: #231A00;
 }
 
-div.page {
-  background-color: #DED3AD;
+div.page-container {
   margin-left: auto;
   margin-right: auto;
-  width: 600px;
+  width: 901px;
   height: 500px;
   display: block;
-  box-shadow: 0px 0px 10px 2px #231A00;
+}
+
+div#sidebar-left {
+  display: inline-block;
+  width: 150px;
+  height: 500px;
+  float: left;
+}
+
+div#sidebar-left button.sidebar-button {
+  padding-top: 8px;
+  height: 100px;
+  width: 150px;
+  border: 0px;
+  font-family: 'jacques_francois_shadowRg';
+  font-size: 55px;
+  display: inline-block;
+  cursor: pointer;
+  background-color: #231A00;
+  color: #DED3AD;
+  transition: color 0.125s;
+  -moz-transition: color 0.125s; /* Firefox 4 */
+  -webkit-transition: color 0.125s; /* Safari and Chrome */
+  -o-transition: color 0.125s; /* Opera */
+  transition: background-color 0.125s;
+  -moz-transition: background-color 0.125s; /* Firefox 4 */
+  -webkit-transition: background-color 0.125s; /* Safari and Chrome */
+  -o-transition: background-color 0.125s; /* Opera */
+}
+
+div#sidebar-left button.sidebar-button:hover {
+  background-color: #DED3AD;
+  color: #231A00;
+}
+
+div#sidebar-left button.sidebar-button:focus {
+  background-color: #DED3AD;
+  color: #231A00;
+}
+
+div#sidebar-left button.sidebar-button.selected {
+  background-color: #DED3AD;
+  color: #231A00;
+}
+
+div.page {
+  background-color: #DED3AD;
+  width: 600px;
+  height: 500px;
+  display: inline-block;
+}
+
+div#sidebar-right {
+  display: inline-block;
+  width: 150px;
+  height: 500px;
+  float: right;
 }
 
 div.page>div.msgbox {
@@ -227,6 +283,103 @@ div.page>div.center.medium {
   background-color: #DED3AD;
   border: 0px;
   display: block;
+}
+
+table#confirm-payments {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  width: 425px;
+  background-color: #EAE6D0;
+  border-collapse: collapse;
+  box-shadow: 0px 0px 2px 1px #EAE6D0;
+}
+
+table#confirm-payments td {
+  padding-left: 5px;
+  font-size: 15px;
+  background-color: #EAE6D0;
+  font-family: 'jacques_francoisregular';
+  text-align: center;
+  color: #231A00;
+  width: 110px;
+  display: inline-block;
+}
+
+table#confirm-payments td.name {
+  padding-left: 5px;
+  font-size: 15px;
+  background-color: #EAE6D0;
+  font-family: 'jacques_francoisregular';
+  text-align: center;
+  color: #231A00;
+  width: 80px;
+  display: inline-block;
+  padding-top:2px;
+  padding-bottom:2px;
+}
+
+table#confirm-payments td.email {
+  padding-left: 5px;
+  font-size: 15px;
+  background-color: #EAE6D0;
+  font-family: 'jacques_francoisregular';
+  text-align: center;
+  color: #231A00;
+  width: 190px;
+  display: inline-block;
+  padding-top:2px;
+  padding-bottom:2px;
+}
+
+table#confirm-payments td.amount {
+  padding-left: 5px;
+  font-size: 15px;
+  background-color: #EAE6D0;
+  font-family: 'droid_serifregular';
+  text-align: left;
+  color: #231A00;
+  width: 70px;
+  display: inline-block;
+  padding-top:2px;
+  padding-bottom:2px;
+}
+
+table#confirm-payments td.button {
+  font-size: 15px;
+  background-color: #EAE6D0;
+  font-family: 'jacques_francoisregular';
+  text-align: center;
+  color: #231A00;
+  width: 60px;
+  display: inline-block;
+}
+
+table#confirm-payments td.button button {
+  margin-left: auto;
+  outline: 1px solid #DED3AD;
+  border: 1px solid #DED3AD;
+  background-color: #231A00;
+  margin-right: auto;
+  width: 58px;
+  height: 20px;
+  font-family: 'jacques_francoisregular';
+  color: #DED3AD;
+  font-size: 15px;
+  display: inline-block;
+  padding-top:0px;
+  padding-bottom:0px;
+}
+
+table#confirm-payments td.button button:focus {
+  outline: 1px solid #EAE6D0;
+  border: 0px;
+}
+
+table#confirm-payments td.button button:hover {
+  outline: 1px solid #EAE6D0;
+  border: 0px;
+  cursor: pointer;
 }
 
 div.page>div>div.info {
@@ -441,7 +594,7 @@ div.page div.small span {
   color: #231A00;
 }
 
-div.page>div.center.medium>form.add-stock>span {
+div.page>div.center.medium span.center.medium {
   width: 425px;
   font-size: 35px;
   font-family: 'jacques_francoisregular';

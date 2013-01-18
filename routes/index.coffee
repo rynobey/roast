@@ -25,6 +25,18 @@ module.exports = ((app) ->
         res.render('add-stock')
   )
 
+  app.get('/home/confirm-payments', (req, res, next) ->
+    if req.user.type isnt '1'
+      res.redirect('/home/add-coffee')
+    else
+      msg = app.locals.dispMsg
+      if msg? and msg isnt ''
+        app.locals.dispMsg = ''
+        res.render('confirm-payments', {msg: msg})
+      else
+        res.render('confirm-payments')
+  )
+
   app.get('/home/add-coffee', (req, res,next) ->
     if req.user.type is '1'
       res.redirect('/home/add-stock')

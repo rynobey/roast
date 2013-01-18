@@ -4,7 +4,7 @@ script src:'/partials/loader'
 div class:'page', id:'page', ->
   div class: 'center medium', ->
     form class:'add-stock', action: '/purchases', method: 'post', ->
-      span class:'space', -> 'Add Stock'
+      span class:'center medium', -> 'Add Stock'
       table class:'stock', ->
         tr class:'stock-header', ->
           td -> 'Type'
@@ -37,9 +37,7 @@ coffeescript ->
   statusData = {}
   timeout = 0
   processResponse = (data) ->
-    console.log data.currentUrl
     if data.success
-      console.log data
       if data.redirect?
         $.bbq.pushState({url:data.redirect})
         $(window).trigger('hashChange')
@@ -114,6 +112,7 @@ coffeescript ->
     )
 
   $(($) ->
+    $('div#sidebar-left').append("<button type='button' class='sidebar-button'></button>")
     $('input#amount').attr('autocomplete', 'off')
     $('input#cost').attr('autocomplete', 'off')
     loadStatus()

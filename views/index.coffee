@@ -17,7 +17,10 @@ html ->
         button class:'navbar', id:'historybutton', href: "/history", -> 'History'
         div class:'right',  ->
           a href:'/deauth', -> 'Logout'
-    div class:'page', id:'page', ->
+    div class:'page-container', ->
+      div class:'sidebar', id:'sidebar-left', ->
+      div class:'page', id:'page', ->
+      div class:'sidebar', id:'sidebar-right', ->
 
 coffeescript ->
   processResponse = (data) ->
@@ -49,6 +52,7 @@ coffeescript ->
   })
 
   $(($) ->
+    $('div#sidebar-left').find('button').remove()
     change = (fromButton) ->
       url = $.bbq.getState('url')
       if not url? or url is '/' or not url or (url is '/login' or url is '/register')

@@ -16,7 +16,12 @@ module.exports = ((app) ->
         description: desc
       })
       pur.save().success(() ->
-        res.json({success:true})
+        app.users.find({where: {type: '1'}}).success((admin) ->
+          admin.balance = admin.balance - parseFloat(cost)
+          admin.save(['balance']).success(() ->
+            res.json({success:true})
+          )
+        )
       )
     else
       res.json({success:false})

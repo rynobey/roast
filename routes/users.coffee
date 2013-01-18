@@ -54,49 +54,99 @@ module.exports = ((app) ->
   )
 
   app.get('/users/payments', (req, res, next) ->
-    sid = utils.extractSID(req.cookies['connect.sid'])
-    app.users.find({where: {sid: sid}}).success((user) ->
-      if user?
-        id = user.id
-        app.payments.findAll({where: {paymentByID: id}}).success((payments) ->
-          paymentArr = {}
-          if payments?
-            paymentArr = new Array(payment.length)
+    if req.user.type isnt '1'
+      sid = utils.extractSID(req.cookies['connect.sid'])
+      app.users.find({where: {sid: sid}}).success((user) ->
+        if user?
+          id = user.id
+          app.payments.findAll({where: {paymentByID: id}}).success((payments) ->
+            paymentArr = {}
             i = 0
-            for payment in payments
-              temp = {
-                paymentAt: payment.createdAt,
-                paymentByID: payment.paymentByID
-              }
-              paymentArr[i] = temp
-              i = i + 1
-          res.json(paymentArr)
-        )
-    )
+            if payments?
+              paymentArr = new Array(payments.length)
+              for payment in payments
+                temp = {
+                  paymentAt: payment.createdAt,
+                  paymentByID: payment.paymentByID,
+                  amount: payment.amount,
+                  ref: payment.reference,
+                  note: payment.note,
+                  confirmed: payment.confirmed
+                }
+                i = i + 1
+                paymentArr[i] = temp
+            res.json(paymentArr)
+          )
+      )
+    else if req.user.type is '1'
+      app.payments.findAll({}).success((payments) ->
+        paymentArr = {}
+        i = 0
+        if payments?
+          paymentArr = new Array(payments.length)
+          async.whilst(
+            () ->
+              return i < payments.length
+            (cb) ->
+              app.users.find({where:{id:payments[i].paymentByID}}).success((user) ->
+                temp = {
+                  name: user.name,
+                  email: user.email,
+                  paymentAt: payments[i].createdAt,
+                  paymentByID: payments[i].paymentByID,
+                  amount: payments[i].amount,
+                  ref: payments[i].reference,
+                  note: payments[i].note,
+                  confirmed: payments[i].confirmed,
+                  id: payments[i].id
+                }
+                paymentArr[i] = temp
+                i = i + 1
+                cb()
+              )
+            (err) ->
+              res.json(paymentArr)
+          )
+      )
   )
 
   app.post('/users/payments', (req, res, next) ->
-    op = req.param('operation', null)
-    params = parseFloat(req.param('params', null))
-    sid = utils.extractSID(req.cookies['connect.sid'])
-    app.users.find({where: {sid: sid}}).success((user) ->
-      if user?
-        if (not (params >= 0)) or (not utils.isNumber(params))
-          params = 0
-        if (op? and op is 'add') and params > 0
-          payment = app.payments.build({
-            paymentByID: user.id
-            amount: params
-          })
-          payment.save().success(() ->
-            user.balance = user.balance + parseFloat(params)
-            user.save(['balance']).success(() ->
-              res.json({success: true})
+    if req.user.type isnt '1'
+      op = req.param('operation', null)
+      params = parseFloat(req.param('params', null))
+      sid = utils.extractSID(req.cookies['connect.sid'])
+      app.users.find({where: {sid: sid}}).success((user) ->
+        if user?
+          if (not (params >= 0)) or (not utils.isNumber(params))
+            params = 0
+          if (op? and op is 'add') and params > 0
+            payment = app.payments.build({
+              paymentByID: user.id
+              amount: params
+            })
+            payment.save().success(() ->
+              user.balance = user.balance + parseFloat(params)
+              user.save(['balance']).success(() ->
+                    res.json({success: true})
+              )
+            )
+          else
+            res.json({success: true})
+      )
+    else if req.user.type is '1'
+      id = req.param('id', null)
+      app.payments.find({where:{id:id}}).success((payment) ->
+        if payment?
+          payment.confirmed = true
+          payment.save(['confirmed']).success(() ->
+            app.users.find({where: {type:'1'}}).success((admin) ->
+              admin.balance = admin.balance + parseFloat(payment.amount)
+              admin.save(['balance']).success(() ->
+                res.json({success: true})
+              )
             )
           )
-        else
-          res.json({success: true})
-    )
+      )
   )
 
   app.get('/users/coffees', (req, res, next) ->
