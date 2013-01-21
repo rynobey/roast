@@ -10,12 +10,18 @@ module.exports = ((app) ->
   )
 
   app.get('/home', (req, res, next) ->
-    res.redirect('/home/add-coffee')
+    res.json({
+      success: true,
+      redirect: '/home/add-coffee'
+    })
   )
 
   app.get('/home/add-stock', (req, res, next) ->
     if req.user.type isnt '1'
-      res.redirect('/home/add-coffee')
+      res.json({
+        success: true,
+        redirect: '/home/add-coffee'
+      })
     else
       msg = app.locals.dispMsg
       if msg? and msg isnt ''
@@ -25,9 +31,27 @@ module.exports = ((app) ->
         res.render('add-stock')
   )
 
+  app.get('/home/stock-payment', (req, res, next) ->
+    if req.user.type is '1'
+      res.json({
+        success: true,
+        redirect: '/home/add-stock'
+      })
+    else
+      msg = app.locals.dispMsg
+      if msg? and msg isnt ''
+        app.locals.dispMsg = ''
+        res.render('stock-payment', {msg: msg})
+      else
+        res.render('stock-payment')
+  )
+
   app.get('/home/confirm-payments', (req, res, next) ->
     if req.user.type isnt '1'
-      res.redirect('/home/add-coffee')
+      res.json({
+        success: true,
+        redirect: '/home/add-coffee'
+      })
     else
       msg = app.locals.dispMsg
       if msg? and msg isnt ''
@@ -39,7 +63,10 @@ module.exports = ((app) ->
 
   app.get('/home/add-coffee', (req, res,next) ->
     if req.user.type is '1'
-      res.redirect('/home/add-stock')
+      res.json({
+        success: true,
+        redirect: '/home/add-stock'
+      })
     else
       msg = app.locals.dispMsg
       if msg? and msg isnt ''
@@ -51,7 +78,10 @@ module.exports = ((app) ->
 
   app.get('/home/add-payment', (req, res, next) ->
     if req.user.type is '1'
-      res.redirect('/home/add-stock')
+      res.json({
+        success: true,
+        redirect: '/home/add-stock'
+      })
     else
       msg = app.locals.dispMsg
       if msg? and msg isnt ''

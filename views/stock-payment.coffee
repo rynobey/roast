@@ -51,21 +51,17 @@ coffeescript ->
     action()
 
   action = () ->
-    if statusData? and statusData.balance? and statusData.totCoffee?
-      $('span#summary').replaceWith(templates.adminsummary({
+    if statusData? and statusData.balance? and statusData.totSpent?
+      $('span#summary').replaceWith(templates.summary({
         balance:statusData.balance,
         totSpent:statusData.totSpent,
-        totCoffee:statusData.totCoffee,
-        totMilk:statusData.totMilk,
-        totSugar:statusData.totSugar
+        totCoffees:statusData.totCoffees
       }))
     else
-      $('span#summary').replaceWith(templates.adminsummary({
+      $('span#summary').replaceWith(templates.summary({
         balance:'-',
         totSpent:'-',
-        totCoffee:'-',
-        totMilk:'-',
-        totSugar:'-'
+        totCoffees:'-'
       }))
     $('form.add-stock button').bind('click', (e) ->
       buttonEvent()

@@ -18,7 +18,10 @@ html ->
         button class:'navbar', id:'registerbutton', href: "/register", -> 'Register'
         div class:'right', style:'visibility:hidden;',  ->
           a href:'/deauth', -> 'Logout'
-    div class:'page', id:'page', ->
+    div class:'page-container', ->
+      div class:'sidebar', id:'sidebar-left', ->
+      div class:'page', id:'page', ->
+      div class:'sidebar', id:'sidebar-right', ->
 
 coffeescript ->
   processResponse = (data) ->
@@ -41,6 +44,7 @@ coffeescript ->
         else
           newPage = $(data)
           newPage.children().hide()
+          $('div#sidebar-left').find('button').remove()
           $('#page').replaceWith(newPage)
           $('#page').children().show("fade", {}, 350)
       )
@@ -48,6 +52,7 @@ coffeescript ->
   })
 
   $(($) ->
+    $('div#sidebar-left').find('button').remove()
     change = (fromButton) ->
       url = $.bbq.getState('url')
       if not url? or not url or (url isnt '/login' and url isnt '/register')

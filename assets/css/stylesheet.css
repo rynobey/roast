@@ -1,10 +1,13 @@
 body.background {
   margin: 0px;
-  width: 110%
   max-height: 100%;
   background-color: #231A00;
   /*background-color: #DED3AD;*/
   display: none;
+}
+
+i.icon-coffee {
+  padding-left: 8px;
 }
 
 div.navbar {
@@ -58,8 +61,8 @@ div.navbar>div.center>button.navbar {
   height: 100px;
   width: 300px;
   border: 0px;
-  font-family: 'jacques_francois_shadowRg';
-  font-size: 55px;
+  font-family: 'droid_serifregular';
+  font-size: 80px;
   display: inline-block;
   cursor: pointer;
   background-color: #231A00;
@@ -92,6 +95,20 @@ div.navbar>div.center>button.navbar.selected {
   color: #231A00;
 }
 
+div.navbar>div.center>button.navbar>span.title {
+  font-size: 30px;
+  font-family: inherit;
+  background-color: inherit;
+  color: inherit;
+}
+
+div.navbar>div.center>button.navbar.selected>span.title {
+  font-size: 30px;
+  font-family: inherit;
+  background-color: inherit;
+  color: inherit;
+}
+
 div.page-container {
   margin-left: auto;
   margin-right: auto;
@@ -101,6 +118,8 @@ div.page-container {
 }
 
 div#sidebar-left {
+  position: relative;
+  top: 50px;
   display: inline-block;
   width: 150px;
   height: 500px;
@@ -108,12 +127,14 @@ div#sidebar-left {
 }
 
 div#sidebar-left button.sidebar-button {
-  padding-top: 8px;
-  height: 100px;
-  width: 150px;
+  float: right;
+  padding-top: 0px;
+  padding-left: 0px;
+  height: 80px;
+  width: 80px;
   border: 0px;
   font-family: 'jacques_francois_shadowRg';
-  font-size: 55px;
+  font-size: 45px;
   display: inline-block;
   cursor: pointer;
   background-color: #231A00;
@@ -126,6 +147,11 @@ div#sidebar-left button.sidebar-button {
   -moz-transition: background-color 0.125s; /* Firefox 4 */
   -webkit-transition: background-color 0.125s; /* Safari and Chrome */
   -o-transition: background-color 0.125s; /* Opera */
+
+  -moz-border-radius: 10px 0px 10px 0px;
+  -webkit-border-top-left-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  border-radius: 10px 0px 0px 10px;
 }
 
 div#sidebar-left button.sidebar-button:hover {
@@ -266,7 +292,7 @@ div.page>div.center {
 }
 
 div.page>div.center.small {
-  padding-top: 20px;
+  margin-top: 20px;
   margin-right: auto;
   margin-left: auto;
   width: 275px;
@@ -290,6 +316,7 @@ table#confirm-payments {
   margin-right: auto;
   margin-top: 10px;
   width: 425px;
+  height: 138px;
   background-color: #EAE6D0;
   border-collapse: collapse;
   box-shadow: 0px 0px 2px 1px #EAE6D0;
@@ -536,7 +563,7 @@ div.page form.add-stock button:hover {
 }
 
 div.page form.add-stock select, div.page form.add-stock select:active {
-  background-color: #D6C999;
+  background-color: #DED3AD;
   overflow: hidden;
   width: 90px;
   height: 25px;

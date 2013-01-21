@@ -5,6 +5,7 @@ html ->
     link type:'text/css', rel:'stylesheet', href:'/css/jquery-ui.css'
     link type:'text/css', rel:'stylesheet', href:'/css/stylesheet.css'
     link type:"text/css", rel:"stylesheet", href:"/css/fonts/stylesheet.css"
+    link type:"text/css", rel:"stylesheet", href:"/css/icons/package1/css/icons.css"
     script src:'/js/jquery-1.8.3.min.js'
     script src:'/js/jquery.ba-bbq.min.js'
     script src:'/js/jquery-ui.js'
@@ -13,8 +14,12 @@ html ->
     div class:'navbar', ->
       div class:'center', ->
         div class:'left', style:'visibility:hidden;',  -> 'Roast'
-        button class:'navbar', id:'homebutton', href: "/home", -> 'Home'
-        button class:'navbar', id:'historybutton', href: "/history", -> 'History'
+        button class:'navbar', id:'homebutton', href: "/home", ->
+          i class:'icon-home-2', ->
+          span class:'title', -> 'Home'
+        button class:'navbar', id:'historybutton', href: "/history", ->
+          i class:'icon-back-in-time', ->
+          span class:'title', -> 'History'
         div class:'right',  ->
           a href:'/deauth', -> 'Logout'
     div class:'page-container', ->
@@ -24,9 +29,7 @@ html ->
 
 coffeescript ->
   processResponse = (data) ->
-    console.log data.currentUrl
     if data.success
-      console.log data
       if data.redirect?
         $.bbq.pushState({url:data.redirect})
         $(window).trigger('hashChange')
@@ -45,6 +48,36 @@ coffeescript ->
         else
           newPage = $(data)
           newPage.children().hide()
+          $('div#sidebar-left').find('button').remove()
+          if $.bbq.getState('url').indexOf('/home/add-stock') is 0 or $.bbq.getState('url').indexOf('/home/confirm-payments') is 0
+            $('div#sidebar-left').append("<button type='button' class='sidebar-button' id='stock' href='/home/add-stock'><i class='icon-cart'></i></button>")
+            $('div#sidebar-left').append("<button type='button' class='sidebar-button' id='payments' href='/home/confirm-payments'><i class='icon-dollar'></button>")
+            if url.indexOf('/home/add-stock') is 0
+              $("button#stock").addClass('selected')
+            else if url.indexOf('/home/confirm-payments') is 0
+              $("button#payments").addClass('selected')
+          else if $.bbq.getState('url').indexOf('/home/add-coffee') is 0 or $.bbq.getState('url').indexOf('/home/add-payment') is 0 or $.bbq.getState('url').indexOf('/home/stock-payment') is 0
+            $('div#sidebar-left').append("<button type='button' class='sidebar-button' id='coffee' href='/home/add-coffee'><i class='icon-coffee'></i></button>")
+            $('div#sidebar-left').append("<button type='button' class='sidebar-button' id='stock' href='/home/stock-payment'><i class='icon-cart'></i></button>")
+            $('div#sidebar-left').append("<button type='button' class='sidebar-button' id='payment' href='/home/add-payment'><i class='icon-dollar'></i></button>")
+            if url.indexOf('/home/add-coffee') is 0
+              $("button#coffee").addClass('selected')
+            else if url.indexOf('/home/stock-payment') is 0
+              $("button#stock").addClass('selected')
+            else if url.indexOf('/home/add-payment') is 0
+              $("button#payment").addClass('selected')
+          $('div#sidebar-left').find('button').on('click', (e) ->
+            e.preventDefault()
+            href = $(this).attr('href')
+            $.bbq.pushState({url:href})
+            $(window).trigger('hashChange')
+            $(this).siblings('button').removeClass('selected')
+            $(this).bind('mouseleave', ->
+              $(this).addClass('selected')
+              $(this).unbind('mouseleave')
+            )
+            return false
+          )
           $('#page').replaceWith(newPage)
           $('#page').children().show("fade", {}, 350)
       )
@@ -55,7 +88,7 @@ coffeescript ->
     $('div#sidebar-left').find('button').remove()
     change = (fromButton) ->
       url = $.bbq.getState('url')
-      if not url? or url is '/' or not url or (url is '/login' or url is '/register')
+      if not url? or url is '/' or url is '/home' or not url or (url is '/login' or url is '/register')
         $.bbq.pushState({url:'/home/add-coffee'})
         url = '/home/add-coffee'
       if fromButton? and not fromButton

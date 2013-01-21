@@ -23,6 +23,26 @@ module.exports = ((app) ->
           )
         )
       )
+    else if req.user.type is '0'
+      type = req.param('type', null)
+      amount = req.param('amount', null)
+      cost = req.param('cost', null)
+      desc = ''
+      pur = app.purchases.build({
+        purchasedByID: req.user.id,
+        type: type,
+        amount: amount,
+        cost: cost,
+        description: desc
+      })
+      pur.save().success(() ->
+        app.users.find({where: {id: req.user.id}}).success((user) ->
+          user.balance = user.balance + parseFloat(cost)
+          user.save(['balance']).success(() ->
+            res.json({success:true})
+          )
+        )
+      )
     else
       res.json({success:false})
   )
