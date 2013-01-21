@@ -10,6 +10,16 @@ i.icon-coffee {
   padding-left: 8px;
 }
 
+div.navbar>div.center>button.navbar>p.login-register-title {
+  padding-top: 0px;
+  margin: 0px 0px 0px 0px;
+  font-size: 50px;
+  display: inline-block;
+  font-family: 'jacques_francois_shadowRg';
+  color: inherit;
+  background-color: inherit;
+}
+
 div.navbar {
   height: 100px;
   width: 100%;
@@ -67,14 +77,14 @@ div.navbar>div.center>button.navbar {
   cursor: pointer;
   background-color: #231A00;
   color: #DED3AD;
-  transition: color 0.125s;
-  -moz-transition: color 0.125s; /* Firefox 4 */
-  -webkit-transition: color 0.125s; /* Safari and Chrome */
-  -o-transition: color 0.125s; /* Opera */
-  transition: background-color 0.125s;
-  -moz-transition: background-color 0.125s; /* Firefox 4 */
-  -webkit-transition: background-color 0.125s; /* Safari and Chrome */
-  -o-transition: background-color 0.125s; /* Opera */
+  transition: color 0.1s;
+  -moz-transition: color 0.1s; /* Firefox 4 */
+  -webkit-transition: color 0.1s; /* Safari and Chrome */
+  -o-transition: color 0.1s; /* Opera */
+  transition: background-color 0.1s;
+  -moz-transition: background-color 0.1s; /* Firefox 4 */
+  -webkit-transition: background-color 0.1s; /* Safari and Chrome */
+  -o-transition: background-color 0.1s; /* Opera */
 }
 
 div.navbar>div.center>button.navbar:hover {
@@ -139,14 +149,14 @@ div#sidebar-left button.sidebar-button {
   cursor: pointer;
   background-color: #231A00;
   color: #DED3AD;
-  transition: color 0.125s;
-  -moz-transition: color 0.125s; /* Firefox 4 */
-  -webkit-transition: color 0.125s; /* Safari and Chrome */
-  -o-transition: color 0.125s; /* Opera */
-  transition: background-color 0.125s;
-  -moz-transition: background-color 0.125s; /* Firefox 4 */
-  -webkit-transition: background-color 0.125s; /* Safari and Chrome */
-  -o-transition: background-color 0.125s; /* Opera */
+  transition: color 0.1s;
+  -moz-transition: color 0.1s; /* Firefox 4 */
+  -webkit-transition: color 0.1s; /* Safari and Chrome */
+  -o-transition: color 0.1s; /* Opera */
+  transition: background-color 0.1s;
+  -moz-transition: background-color 0.1s; /* Firefox 4 */
+  -webkit-transition: background-color 0.1s; /* Safari and Chrome */
+  -o-transition: background-color 0.1s; /* Opera */
 
   -moz-border-radius: 10px 0px 10px 0px;
   -webkit-border-top-left-radius: 10px;

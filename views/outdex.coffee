@@ -5,6 +5,7 @@ html ->
     link type:'text/css', rel:'stylesheet', href:'/css/jquery-ui.css'
     link type:'text/css', rel:'stylesheet', href:'/css/stylesheet.css'
     link type:"text/css", rel:"stylesheet", href:"/css/fonts/stylesheet.css"
+    link type:"text/css", rel:"stylesheet", href:"/css/icons/package1/css/icons.css"
     script src:'/js/jquery-1.8.3.min.js'
     script src:'/js/jquery.ba-bbq.min.js'
     script src:'/js/jquery-ui.js'
@@ -14,8 +15,12 @@ html ->
     div class:'navbar', ->
       div class:'center', ->
         div class:'left', style:'visibility:hidden;',  -> 'Roast'
-        button class:'navbar', id:'loginbutton', href: "/login", -> 'Login'
-        button class:'navbar', id:'registerbutton', href: "/register", -> 'Register'
+        button class:'navbar', id:'loginbutton', href: "/login", ->
+          i class:'icon-key-1', ->
+          span class:'title', -> 'Login'
+        button class:'navbar', id:'registerbutton', href: "/register", ->
+          i class:'icon-edit-1', ->
+          span class:'title', -> 'Register'
         div class:'right', style:'visibility:hidden;',  ->
           a href:'/deauth', -> 'Logout'
     div class:'page-container', ->
@@ -46,7 +51,7 @@ coffeescript ->
           newPage.children().hide()
           $('div#sidebar-left').find('button').remove()
           $('#page').replaceWith(newPage)
-          $('#page').children().show("fade", {}, 350)
+          $('#page').children().show("fade", {}, 150)
       )
       return el
   })
@@ -64,7 +69,7 @@ coffeescript ->
 
     $(window).bind('hashChange', change)
     $(document).ready(() ->
-      $('body.background').show("fade", {}, 300)
+      $('body.background').show("fade", {}, 150)
     )
     $('div.navbar').find('button').on('click', (e) ->
       e.preventDefault()

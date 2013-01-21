@@ -9,7 +9,9 @@ div class:'page', id:'page', ->
     input class: 'default', type: 'text', id: 'email', name: 'email', value: 'e-mail'
     input class: 'default', type: 'text', id: 'password', name: 'password', value: 'password'
     input type:'hidden', id:'hash', name:'hash', value:''
-    button type:'button', id:'submitbutton', -> 'Submit'
+    button type:'button', id:'submitbutton', ->
+      i class:'icon-thumbs-up', ->
+      text 'Submit'
 
 coffeescript ->
   $(($) ->

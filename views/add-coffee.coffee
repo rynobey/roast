@@ -9,7 +9,9 @@ div class:'page', id:'page', ->
         label for:'params', -> 'Qty:'
         input type: 'text', id: 'params', name: 'params', value: '1', onkeypress:"return event.keyCode!=13;"
         input type: 'hidden', id: 'operation', name: 'operation', value: 'add'
-      button type: 'button',-> 'Submit'
+      button type: 'button',->
+        i class:'icon-thumbs-up', ->
+        text 'Submit'
   div class: 'center small', ->
     span class:'space', -> 'Stats'
     br()

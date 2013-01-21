@@ -27,7 +27,9 @@ div class:'page', id:'page', ->
               input class:'stock-cost', type:'text', id:'cost', name:'cost', value:'0', onkeypress:"return event.keyCode!=13;"
       input type: 'hidden', id: 'type', name: 'type', value: 'Coffee'
       input type: 'hidden', id: 'operation', name: 'operation', value: 'add'
-      button type: 'button',-> 'Submit'
+      button type: 'button',->
+        i class:'icon-thumbs-up', ->
+        text 'Submit'
   div class: 'center small', ->
     span class:'space', -> 'Stats'
     br()

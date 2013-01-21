@@ -28,95 +28,70 @@
     },
     {
       "search": [
-        "home"
+        "star"
       ],
-      "code": 59395,
-      "uid": "d6944e1d9af302093d43b299bbecbbbe02",
-      "file": "home",
-      "css": "home-1",
-      "orig_css": "home",
-      "orig_code": 59395,
-      "src": "iconic",
-      "from": 8962
-    },
-    {
-      "search": [
-        "home"
-      ],
-      "code": 8962,
-      "from": 8962,
-      "uid": "w3nzesrlbezu6f30q7ytyq919p6gdlb6",
-      "css": "home",
-      "orig_css": "home",
-      "orig_code": 8962,
-      "src": "typicons"
+      "code": 9733,
+      "from": 9733,
+      "uid": "474656633f79ea2f1dad59ff63f6bf07",
+      "css": "star",
+      "orig_css": "star",
+      "orig_code": 9733,
+      "src": "fontawesome"
     },
     {
       "search": [
         "star"
       ],
-      "code": 9733,
-      "uid": "5daac230ad1cfdf4782697dfbda679dd",
-      "file": "star",
-      "css": "star",
-      "orig_css": "star",
-      "orig_code": 9733,
-      "src": "iconic",
-      "from": 9733
-    },
-    {
-      "search": [
-        "archive"
-      ],
-      "code": 59192,
-      "from": 59192,
-      "uid": "96ea1be71f597a5bdfc8f791ada4f651",
-      "css": "archive",
-      "orig_css": "archive",
-      "orig_code": 59192,
-      "src": "entypo"
-    },
-    {
-      "search": [
-        "basket",
-        "shopping",
-        "cart"
-      ],
-      "code": 59400,
-      "uid": "e126987944593dfee041f8e2a68145db",
-      "css": "basket-2",
-      "orig_css": "basket",
-      "orig_code": 59400,
-      "src": "entypo",
-      "from": 59197
-    },
-    {
-      "search": [
-        "basket",
-        "shopping",
-        "cart"
-      ],
-      "code": 59397,
-      "from": 59197,
-      "uid": "9affc98d652b86628d650ee58dbf0357",
-      "css": "basket-1",
-      "orig_css": "basket",
-      "orig_code": 59397,
+      "code": 9734,
+      "from": 9734,
+      "uid": "d17030afaecc1e1c22349b99f3c4992a",
+      "css": "star-empty",
+      "orig_css": "star-empty",
+      "orig_code": 9734,
       "src": "fontawesome"
     },
     {
       "search": [
-        "basket",
-        "shopping",
-        "cart"
+        "key"
       ],
-      "code": 59197,
-      "from": 59197,
-      "uid": "vqyhv5kmwcj9zxq28dhq5npykr2k39co",
-      "css": "basket",
-      "orig_css": "basket",
-      "orig_code": 59197,
-      "src": "modernpics"
+      "code": 9919,
+      "uid": "76fa76eb3472394c9937f7c7734f77b2",
+      "file": "key_stroke",
+      "css": "key-1",
+      "orig_css": "key",
+      "orig_code": 9919,
+      "src": "iconic",
+      "from": 9919
+    },
+    {
+      "search": [
+        "pencil",
+        "write",
+        "reply",
+        "edit"
+      ],
+      "code": 59400,
+      "from": 9997,
+      "uid": "41087bc74d4b20b55059c60a33bf4008",
+      "css": "edit-1",
+      "orig_css": "edit",
+      "orig_code": 59400,
+      "src": "fontawesome"
+    },
+    {
+      "search": [
+        "pencil",
+        "write",
+        "reply",
+        "edit"
+      ],
+      "code": 9997,
+      "from": 9997,
+      "uid": "jqzwo6i8oicjbn049sh2856d8anrqoli",
+      "css": "edit",
+      "orig_css": "edit",
+      "orig_code": 9997,
+      "src": "typicons"
     },
     {
       "search": [
@@ -177,68 +152,6 @@
     },
     {
       "search": [
-        "basket",
-        "shopping",
-        "cart"
-      ],
-      "code": 59310,
-      "from": 59310,
-      "uid": "s51at1xi1fkaomxvp6dqaax5jmyhtn4h",
-      "css": "basket-alt",
-      "orig_css": "basket-alt",
-      "orig_code": 59310,
-      "src": "modernpics"
-    },
-    {
-      "search": [
-        "cafe"
-      ],
-      "code": 59404,
-      "uid": "492fe0ef4cb41d4e4de8502897685399",
-      "css": "cafe",
-      "orig_css": "cafe",
-      "orig_code": 59404,
-      "src": "maki",
-      "from": 59404
-    },
-    {
-      "search": [
-        "fuel"
-      ],
-      "code": 59417,
-      "uid": "63af7ffdab0d3546333634c63554bb82",
-      "css": "fuel",
-      "orig_css": "fuel",
-      "orig_code": 59417,
-      "src": "maki",
-      "from": 59417
-    },
-    {
-      "search": [
-        "grocery"
-      ],
-      "code": 59422,
-      "uid": "00341f8df1496285c31db5988db1d8b5",
-      "css": "grocery-store",
-      "orig_css": "grocery-store",
-      "orig_code": 59422,
-      "src": "maki",
-      "from": 59422
-    },
-    {
-      "search": [
-        "shop"
-      ],
-      "code": 59445,
-      "uid": "83a806d41893e8bc6fac601669c76cd2",
-      "css": "shop",
-      "orig_css": "shop",
-      "orig_code": 59445,
-      "src": "maki",
-      "from": 59445
-    },
-    {
-      "search": [
         "coffee",
         "cup"
       ],
@@ -252,29 +165,33 @@
     },
     {
       "search": [
-        "folder"
+        "thumbs",
+        "up",
+        "like",
+        "vote"
       ],
-      "code": 61717,
-      "uid": "6533bdc16ab201eb3f3b27ce989cab33",
-      "css": "folder-open-empty",
-      "orig_css": "folder-open-empty",
-      "orig_code": 61717,
-      "src": "fontawesome",
-      "from": 61717
+      "code": 128077,
+      "from": 128077,
+      "uid": "acf41aa4018e58d49525665469e35665",
+      "css": "thumbs-up",
+      "orig_css": "thumbs-up",
+      "orig_code": 128077,
+      "src": "fontawesome"
     },
     {
       "search": [
-        "bag",
-        "shopping",
-        "cart"
+        "thumbs",
+        "up",
+        "like",
+        "vote"
       ],
-      "code": 128092,
-      "uid": "2c71ee1c65e1992ba32d5ffc5ee7f337",
-      "css": "bag",
-      "orig_css": "bag",
-      "orig_code": 128092,
-      "src": "entypo",
-      "from": 128092
+      "code": 59395,
+      "from": 128077,
+      "uid": "tau7t0t38662eqxrb80ozeiase5em2x9",
+      "css": "thumbs-up-1",
+      "orig_css": "thumbs-up",
+      "orig_code": 59395,
+      "src": "typicons"
     },
     {
       "search": [
@@ -288,30 +205,6 @@
       "orig_css": "dollar",
       "orig_code": 128181,
       "src": "modernpics"
-    },
-    {
-      "search": [
-        "folder"
-      ],
-      "code": 128193,
-      "uid": "0ccb084ddeeae372673793ed0b45bb4a",
-      "css": "folder",
-      "orig_css": "folder",
-      "orig_code": 128193,
-      "src": "entypo",
-      "from": 128193
-    },
-    {
-      "search": [
-        "folder"
-      ],
-      "code": 128194,
-      "from": 128194,
-      "uid": "c95735c17a10af81448c7fed98a04546",
-      "css": "folder-open",
-      "orig_css": "folder-open",
-      "orig_code": 128194,
-      "src": "fontawesome"
     },
     {
       "search": [
@@ -414,42 +307,41 @@
     },
     {
       "search": [
-        "book"
-      ],
-      "code": 128213,
-      "uid": "48b79f27e4798f23bafa07b55dbe5b73",
-      "css": "book",
-      "orig_css": "book",
-      "orig_code": 128213,
-      "src": "entypo",
-      "from": 128213
-    },
-    {
-      "search": [
-        "book",
-        "doc"
-      ],
-      "code": 128214,
-      "uid": "51727ca007aa35ceabcaffc28934faee",
-      "css": "book-open",
-      "orig_css": "book-open",
-      "orig_code": 128214,
-      "src": "entypo",
-      "from": 128214
-    },
-    {
-      "search": [
-        "book",
-        "doc"
+        "key",
+        "password"
       ],
       "code": 59402,
-      "uid": "8fc56819afcd07e2786e34f18d39b71b",
-      "file": "book_alt2",
-      "css": "book-open-1",
-      "orig_css": "book-open",
+      "uid": "8beac4a5fd5bed9f82ca7a96cc8ba218",
+      "css": "key-2",
+      "orig_css": "key",
       "orig_code": 59402,
+      "src": "entypo",
+      "from": 128273
+    },
+    {
+      "search": [
+        "key"
+      ],
+      "code": 128273,
+      "uid": "c6ecc52b6db2a649a08ff54e5ea62886",
+      "file": "key_fill",
+      "css": "key-inv",
+      "orig_css": "key-inv",
+      "orig_code": 128273,
       "src": "iconic",
-      "from": 128214
+      "from": 128273
+    },
+    {
+      "search": [
+        "key"
+      ],
+      "code": 59397,
+      "from": 128273,
+      "uid": "upidp9k72x66utj5w89oyq65tp6r2tpe",
+      "css": "key",
+      "orig_css": "key",
+      "orig_code": 59397,
+      "src": "typicons"
     },
     {
       "search": [

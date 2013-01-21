@@ -14,10 +14,10 @@ html ->
     div class:'navbar', ->
       div class:'center', ->
         div class:'left', style:'visibility:hidden;',  -> 'Roast'
-        button class:'navbar', id:'homebutton', href: "/home", ->
+        button type:'button', class:'navbar', id:'homebutton', href: "/home", ->
           i class:'icon-home-2', ->
           span class:'title', -> 'Home'
-        button class:'navbar', id:'historybutton', href: "/history", ->
+        button type:'button', class:'navbar', id:'historybutton', href: "/history", ->
           i class:'icon-back-in-time', ->
           span class:'title', -> 'History'
         div class:'right',  ->
@@ -79,7 +79,7 @@ coffeescript ->
             return false
           )
           $('#page').replaceWith(newPage)
-          $('#page').children().show("fade", {}, 350)
+          $('#page').children().show("fade", {}, 150)
       )
       return el
   })
@@ -100,7 +100,7 @@ coffeescript ->
 
     $(window).bind('hashChange', change)
     $(document).ready(() ->
-      $('body.background').show("fade", {}, 300)
+      $('body.background').show("fade", {}, 150)
     )
     $('div.navbar').find('button').on('click', (e) ->
       e.preventDefault()
