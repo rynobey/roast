@@ -30,8 +30,8 @@ app.use(express.session({
 }))
 app.use(express.bodyParser())
 # host js/css/img locally
-app.use(express.static(__dirname + '/assets'))
 app.use(require('connect-assets')())
+app.use(express.static(__dirname + '/public'))
 app.use(app.router)
 
 # setup and expose db tables

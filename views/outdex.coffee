@@ -2,10 +2,14 @@ doctype 5
 html ->
   head ->
     title 'Roast::Index'
-    text global.css('jquery-ui.css')
-    text global.css('stylesheet.css')
-    text global.css('fonts/stylesheet.css')
-    text global.css('icons/package1/css/icons.css')
+    link type:'text/css', rel:'stylesheet', href:'/css/jquery-ui.css'
+    link type:'text/css', rel:'stylesheet', href:'/css/stylesheet.css'
+    link type:"text/css", rel:"stylesheet", href:"/css/fonts/stylesheet.css"
+    link type:"text/css", rel:"stylesheet", href:"/css/icons/package1/css/icons.css"
+    #text global.css('jquery-ui.css')
+    #text global.css('stylesheet.css')
+    #text global.css('fonts/stylesheet.css')
+    #text global.css('icons/package1/css/icons.css')
     text global.js('jquery-1.8.3.min.js')
     text global.js('jquery.ba-bbq.min.js')
     text global.js('jquery-ui.js')
