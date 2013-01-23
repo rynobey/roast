@@ -34,6 +34,7 @@ coffeescript ->
     $(this).innerChange(false)
     $(document).ready(() ->
       $('body.background').show("fade", {}, 150)
+      $(window).unbind('hashChange')
       $(window).bind('hashChange', $(this).innerChange)
       $('div.navbar').find('button').on('click', (e) ->
         $(this).navButtonEvent(this, e)

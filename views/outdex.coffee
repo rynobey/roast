@@ -9,6 +9,7 @@ html ->
     text global.js('jquery-1.8.3.min.js')
     text global.js('jquery.ba-bbq.min.js')
     text global.js('jquery-ui.js')
+    text global.js('block-ui.js')
     text global.js('scripts')
     text global.js('sha1.js')
 
@@ -35,6 +36,7 @@ coffeescript ->
     $(this).outerChange(false)
     $(document).ready(() ->
       $('body.background').show("fade", {}, 150)
+      $(window).unbind('hashChange')
       $(window).bind('hashChange', $(this).outerChange)
       $('div.navbar').find('button').on('click', (e) ->
         $(this).navButtonEvent(this, e)
