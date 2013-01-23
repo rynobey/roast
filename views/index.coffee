@@ -2,14 +2,15 @@ doctype 5
 html ->
   head ->
     title 'Roast::Index'
-    link type:'text/css', rel:'stylesheet', href:'/css/jquery-ui.css'
-    link type:'text/css', rel:'stylesheet', href:'/css/stylesheet.css'
-    link type:"text/css", rel:"stylesheet", href:"/css/fonts/stylesheet.css"
-    link type:"text/css", rel:"stylesheet", href:"/css/icons/package1/css/icons.css"
-    script src:'/js/jquery-1.8.3.min.js'
-    script src:'/js/jquery.ba-bbq.min.js'
-    script src:'/js/jquery-ui.js'
-    script src:'/js/block-ui.js'
+    text global.css('jquery-ui.css')
+    text global.css('stylesheet.css')
+    text global.css('fonts/stylesheet.css')
+    text global.css('icons/package1/css/icons.css')
+    text global.js('jquery-1.8.3.min.js')
+    text global.js('jquery.ba-bbq.min.js')
+    text global.js('jquery-ui.js')
+    text global.js('block-ui.js')
+    text global.js('scripts')
   body class:'background', ->
     div class:'navbar', ->
       div class:'center', ->
@@ -28,91 +29,14 @@ html ->
       div class:'sidebar', id:'sidebar-right', ->
 
 coffeescript ->
-  processResponse = (data) ->
-    if data.success
-      if data.redirect?
-        $.bbq.pushState({url:data.redirect})
-        $(window).trigger('hashChange')
-      if data.reload?
-        $.bbq.pushState({url:data.currentUrl})
-        $(window).trigger('hashChange')
-
-  $.fn.extend({
-    contentLoad: (url) ->
-      el = this
-      currentUrl = "/index#url=#{$.bbq.getState('url')}"
-      $.get(url, (data, status, xhr) ->
-        if $.isPlainObject(data)
-          data.currentUrl = currentUrl
-          processResponse(data)
-        else
-          newPage = $(data)
-          newPage.children().hide()
-          $('div#sidebar-left').find('button').remove()
-          if $.bbq.getState('url').indexOf('/home/add-stock') is 0 or $.bbq.getState('url').indexOf('/home/confirm-payments') is 0
-            $('div#sidebar-left').append("<button type='button' class='sidebar-button' id='stock' href='/home/add-stock'><i class='icon-cart'></i></button>")
-            $('div#sidebar-left').append("<button type='button' class='sidebar-button' id='payments' href='/home/confirm-payments'><i class='icon-dollar'></button>")
-            if url.indexOf('/home/add-stock') is 0
-              $("button#stock").addClass('selected')
-            else if url.indexOf('/home/confirm-payments') is 0
-              $("button#payments").addClass('selected')
-          else if $.bbq.getState('url').indexOf('/home/add-coffee') is 0 or $.bbq.getState('url').indexOf('/home/add-payment') is 0 or $.bbq.getState('url').indexOf('/home/stock-payment') is 0
-            $('div#sidebar-left').append("<button type='button' class='sidebar-button' id='coffee' href='/home/add-coffee'><i class='icon-coffee'></i></button>")
-            $('div#sidebar-left').append("<button type='button' class='sidebar-button' id='stock' href='/home/stock-payment'><i class='icon-cart'></i></button>")
-            $('div#sidebar-left').append("<button type='button' class='sidebar-button' id='payment' href='/home/add-payment'><i class='icon-dollar'></i></button>")
-            if url.indexOf('/home/add-coffee') is 0
-              $("button#coffee").addClass('selected')
-            else if url.indexOf('/home/stock-payment') is 0
-              $("button#stock").addClass('selected')
-            else if url.indexOf('/home/add-payment') is 0
-              $("button#payment").addClass('selected')
-          $('div#sidebar-left').find('button').on('click', (e) ->
-            e.preventDefault()
-            href = $(this).attr('href')
-            $.bbq.pushState({url:href})
-            $(window).trigger('hashChange')
-            $(this).siblings('button').removeClass('selected')
-            $(this).bind('mouseleave', ->
-              $(this).addClass('selected')
-              $(this).unbind('mouseleave')
-            )
-            return false
-          )
-          $('#page').replaceWith(newPage)
-          $('#page').children().show("fade", {}, 150)
-      )
-      return el
-  })
-
   $(($) ->
-    $('div#sidebar-left').find('button').remove()
-    change = (fromButton) ->
-      url = $.bbq.getState('url')
-      if not url? or url is '/' or url is '/home' or not url or (url is '/login' or url is '/register')
-        $.bbq.pushState({url:'/home/add-coffee'})
-        url = '/home/add-coffee'
-      if fromButton? and not fromButton
-        if url.indexOf('/home') is 0
-          $("button#homebutton").addClass('selected')
-        else if url.indexOf('/history') is 0
-          $("button#historybutton").addClass('selected')
-      $('#page').contentLoad(url)
-
-    $(window).bind('hashChange', change)
+    $(this).sidebarButtons()
+    $(this).innerChange(false)
     $(document).ready(() ->
       $('body.background').show("fade", {}, 150)
-    )
-    $('div.navbar').find('button').on('click', (e) ->
-      e.preventDefault()
-      href = $(this).attr('href')
-      $.bbq.pushState({url:href})
-      $(window).trigger('hashChange')
-      $(this).siblings('button').removeClass('selected')
-      $(this).bind('mouseleave', ->
-        $(this).addClass('selected')
-        $(this).unbind('mouseleave')
+      $(window).bind('hashChange', $(this).innerChange)
+      $('div.navbar').find('button').on('click', (e) ->
+        $(this).navButtonEvent(this, e)
       )
-      return false
     )
-    change(false)
   )

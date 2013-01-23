@@ -1,8 +1,8 @@
 body.background {
   margin: 0px;
   max-height: 100%;
-  background-color: #231A00;
-  /*background-color: #DED3AD;*/
+  background-color: #D1D1D1;
+  /*background-color: #E2E2E2;*/
   display: none;
 }
 
@@ -25,7 +25,7 @@ div.navbar {
   width: 100%;
   margin-left: 0px;
   margin-top: -10px;
-  background-color: #231A00;
+  background-color: #3A3A3A;
 }
 
 div.navbar>div.center {
@@ -33,7 +33,7 @@ div.navbar>div.center {
   height: 100px;
   margin-left: auto;
   margin-right: auto;
-  background-color: #231A00;
+  background-color: #3A3A3A;
 }
 
 div.navbar>div.center>div.left {
@@ -42,26 +42,33 @@ div.navbar>div.center>div.left {
   font-size: 25px;
   border: 0px;
   display: inline-block;
-  background-color: #231A00;
-  color: #DED3AD;
+  background-color: #3A3A3A;
+  color: #E2E2E2;
   font-family: 'Great Vibes';
   text-align: center;
 }
 
 div.navbar>div.center>div.right {
-  height: 40px;
+  height: 38px;
   width: 150px;
   border: 0px;
   display: inline-block;
-  background-color: #231A00;
-  color: #DED3AD;
+  background-color: #3A3A3A;
+  color: #E2E2E2;
   font-family: 'Great Vibes';
   text-align: center;
 }
 
 div.navbar>div.center>div.right>a {
-  color: #DED3AD;
-  background-color: #231A00;
+  color: #E2E2E2;
+  background-color: #3A3A3A;
+  font-family: 'jacques_francoisregular';
+  font-size: 20px;
+}
+
+div.navbar>div.center>div.right>a:hover {
+  color: #FF0033;
+  background-color: #3A3A3A;
   font-family: 'jacques_francoisregular';
   font-size: 20px;
 }
@@ -75,8 +82,8 @@ div.navbar>div.center>button.navbar {
   font-size: 80px;
   display: inline-block;
   cursor: pointer;
-  background-color: #231A00;
-  color: #DED3AD;
+  background-color: #3A3A3A;
+  color: #E2E2E2;
   transition: color 0.1s;
   -moz-transition: color 0.1s; /* Firefox 4 */
   -webkit-transition: color 0.1s; /* Safari and Chrome */
@@ -89,20 +96,20 @@ div.navbar>div.center>button.navbar {
 
 div.navbar>div.center>button.navbar:hover {
   height: 100px;
-  background-color: #DED3AD;
-  color: #231A00;
+  background-color: #E2E2E2;
+  color: #3A3A3A;
 }
 
 div.navbar>div.center>button.navbar:focus {
   height: 100px;
-  background-color: #DED3AD;
-  color: #231A00;
+  background-color: #E2E2E2;
+  color: #3A3A3A;
 }
 
 div.navbar>div.center>button.navbar.selected {
   height: 100px;
-  background-color: #DED3AD;
-  color: #231A00;
+  background-color: #E2E2E2;
+  color: #3A3A3A;
 }
 
 div.navbar>div.center>button.navbar>span.title {
@@ -147,8 +154,8 @@ div#sidebar-left button.sidebar-button {
   font-size: 45px;
   display: inline-block;
   cursor: pointer;
-  background-color: #231A00;
-  color: #DED3AD;
+  background-color: #D1D1D1;
+  color: #FFFFFF;
   transition: color 0.1s;
   -moz-transition: color 0.1s; /* Firefox 4 */
   -webkit-transition: color 0.1s; /* Safari and Chrome */
@@ -165,22 +172,22 @@ div#sidebar-left button.sidebar-button {
 }
 
 div#sidebar-left button.sidebar-button:hover {
-  background-color: #DED3AD;
-  color: #231A00;
+  background-color: #E2E2E2;
+  color: #3A3A3A;
 }
 
 div#sidebar-left button.sidebar-button:focus {
-  background-color: #DED3AD;
-  color: #231A00;
+  background-color: #E2E2E2;
+  color: #3A3A3A;
 }
 
 div#sidebar-left button.sidebar-button.selected {
-  background-color: #DED3AD;
-  color: #231A00;
+  background-color: #E2E2E2;
+  color: #3A3A3A;
 }
 
 div.page {
-  background-color: #DED3AD;
+  background-color: #E2E2E2;
   width: 600px;
   height: 500px;
   display: inline-block;
@@ -202,6 +209,7 @@ div.page>div.msgbox {
   font-size: 20px;
   text-align: center;
   font-family: 'jacques_francoisregular';
+  color: #3A3A3A;
 }
 
 div.page>div.statusbox {
@@ -216,7 +224,7 @@ div.page>div.statusbox {
 div.page>form.login-register {
   padding-right:12.5px;
   padding-left:12.5px;
-  background-color: #DED3AD;
+  background-color: #E2E2E2;
   border: 0px;
   width: 275px;
   height: 167px;
@@ -225,8 +233,8 @@ div.page>form.login-register {
 }
 
 div.page>form.login-register>input {
-  border: 1px solid #DED3AD;
-  background-color: #EAE6D0;
+  border: 1px solid #E2E2E2;
+  background-color: #FFFFFF;
   margin-left: auto;
   margin-right: auto;
   padding-left: 5px;
@@ -237,35 +245,35 @@ div.page>form.login-register>input {
   font-family: 'jacques_francoisregular';
   text-align: center;
   outline: none;
-  color: #231A00;
-  box-shadow: 0px 0px 2px 1px #DED3AD inset;
+  color: #3A3A3A;
+  box-shadow: 0px 0px 2px 1px #E2E2E2 inset;
 }
 
 div.page>form.login-register>input.default {
-  color: #D6C999;
+  color: #AFA99D;
 }
 
 div.page>form.login-register>button {
   margin-top: 1px;
   margin-left: 1px;
-  outline: 1px solid #DED3AD;
-  border: 1px solid #DED3AD;
-  background-color: #231A00;
+  outline: 1px solid #E2E2E2;
+  border: 1px solid #E2E2E2;
+  background-color: #3A3A3A;
   margin-right: auto;
   width: 273px;
   height: 43px;
   font-family: 'jacques_francoisregular';
-  color: #DED3AD;
+  color: #E2E2E2;
   font-size: 20px;
 }
 
 div.page>form.login-register>button:focus {
-  outline: 1px solid #EAE6D0;
+  outline: 1px solid #FFFFFF;
   border: 0px;
 }
 
 div.page>form.login-register>button:hover {
-  outline: 1px solid #EAE6D0;
+  outline: 1px solid #FFFFFF;
   border: 0px;
   cursor: pointer;
 }
@@ -273,7 +281,7 @@ div.page>form.login-register>button:hover {
 div.page>div.left {
   margin-right:12.5px;
   margin-left:12.5px;
-  background-color: #DED3AD;
+  background-color: #E2E2E2;
   border: 0px;
   width: 275px;
   height: 167px;
@@ -284,7 +292,7 @@ div.page>div.left {
 div.page>div.right {
   margin-right:12.5px;
   margin-left:12.5px;
-  background-color: #DED3AD;
+  background-color: #E2E2E2;
   border: 0px;
   width: 275px;
   height: 167px;
@@ -296,7 +304,7 @@ div.page>div.center {
   margin-right: auto;
   margin-left: auto;
   width: 300px;
-  background-color: #DED3AD;
+  background-color: #E2E2E2;
   border: 0px;
   display: block;
 }
@@ -306,7 +314,7 @@ div.page>div.center.small {
   margin-right: auto;
   margin-left: auto;
   width: 275px;
-  background-color: #DED3AD;
+  background-color: #E2E2E2;
   border: 0px;
   display: block;
 }
@@ -316,7 +324,7 @@ div.page>div.center.medium {
   margin-right: auto;
   margin-left: auto;
   width: 425px;
-  background-color: #DED3AD;
+  background-color: #E2E2E2;
   border: 0px;
   display: block;
 }
@@ -327,18 +335,18 @@ table#confirm-payments {
   margin-top: 10px;
   width: 425px;
   height: 138px;
-  background-color: #EAE6D0;
+  background-color: #FFFFFF;
   border-collapse: collapse;
-  box-shadow: 0px 0px 2px 1px #EAE6D0;
+  box-shadow: 0px 0px 2px 1px #FFFFFF;
 }
 
 table#confirm-payments td {
   padding-left: 5px;
   font-size: 15px;
-  background-color: #EAE6D0;
+  background-color: #FFFFFF;
   font-family: 'jacques_francoisregular';
   text-align: center;
-  color: #231A00;
+  color: #3A3A3A;
   width: 110px;
   display: inline-block;
 }
@@ -346,10 +354,10 @@ table#confirm-payments td {
 table#confirm-payments td.name {
   padding-left: 5px;
   font-size: 15px;
-  background-color: #EAE6D0;
+  background-color: #FFFFFF;
   font-family: 'jacques_francoisregular';
   text-align: center;
-  color: #231A00;
+  color: #3A3A3A;
   width: 80px;
   display: inline-block;
   padding-top:2px;
@@ -359,10 +367,10 @@ table#confirm-payments td.name {
 table#confirm-payments td.email {
   padding-left: 5px;
   font-size: 15px;
-  background-color: #EAE6D0;
+  background-color: #FFFFFF;
   font-family: 'jacques_francoisregular';
   text-align: center;
-  color: #231A00;
+  color: #3A3A3A;
   width: 190px;
   display: inline-block;
   padding-top:2px;
@@ -372,10 +380,10 @@ table#confirm-payments td.email {
 table#confirm-payments td.amount {
   padding-left: 5px;
   font-size: 15px;
-  background-color: #EAE6D0;
+  background-color: #FFFFFF;
   font-family: 'droid_serifregular';
   text-align: left;
-  color: #231A00;
+  color: #3A3A3A;
   width: 70px;
   display: inline-block;
   padding-top:2px;
@@ -384,24 +392,24 @@ table#confirm-payments td.amount {
 
 table#confirm-payments td.button {
   font-size: 15px;
-  background-color: #EAE6D0;
+  background-color: #FFFFFF;
   font-family: 'jacques_francoisregular';
   text-align: center;
-  color: #231A00;
+  color: #3A3A3A;
   width: 60px;
   display: inline-block;
 }
 
 table#confirm-payments td.button button {
   margin-left: auto;
-  outline: 1px solid #DED3AD;
-  border: 1px solid #DED3AD;
-  background-color: #231A00;
+  outline: 1px solid #E2E2E2;
+  border: 1px solid #E2E2E2;
+  background-color: #3A3A3A;
   margin-right: auto;
   width: 58px;
   height: 20px;
   font-family: 'jacques_francoisregular';
-  color: #DED3AD;
+  color: #E2E2E2;
   font-size: 15px;
   display: inline-block;
   padding-top:0px;
@@ -409,12 +417,12 @@ table#confirm-payments td.button button {
 }
 
 table#confirm-payments td.button button:focus {
-  outline: 1px solid #EAE6D0;
+  outline: 1px solid #FFFFFF;
   border: 0px;
 }
 
 table#confirm-payments td.button button:hover {
-  outline: 1px solid #EAE6D0;
+  outline: 1px solid #FFFFFF;
   border: 0px;
   cursor: pointer;
 }
@@ -429,8 +437,8 @@ div.page>div>div.info {
 
 div.page form label {
   height: 28px;
-  background-color: #EAE6D0;
-  color: #231A00;
+  background-color: #FFFFFF;
+  color: #3A3A3A;
   display: inline-block;
   border: 0px;
   outline: none;
@@ -439,7 +447,7 @@ div.page form label {
 
 div.page form.add-coffee input {
   border: 0px;
-  background-color: #EAE6D0;
+  background-color: #FFFFFF;
   padding-top: 0px;
   padding-bottom: 0px;
   padding-left: 5px;
@@ -450,58 +458,154 @@ div.page form.add-coffee input {
   font-family: 'droid_serifregular';
   text-align: right;
   outline: none;
-  color: #231A00;
+  color: #3A3A3A;
   display: inline-block;
 }
 
 div.page form.add-coffee button {
   margin-top: 1px;
   margin-left: 1px;
-  outline: 1px solid #DED3AD;
-  border: 1px solid #DED3AD;
-  background-color: #231A00;
+  outline: 1px solid #E2E2E2;
+  border: 1px solid #E2E2E2;
+  background-color: #3A3A3A;
   margin-right: auto;
   width: 273px;
   height: 43px;
   font-family: 'jacques_francoisregular';
-  color: #DED3AD;
+  color: #E2E2E2;
   font-size: 20px;
 }
 
 div.page form.add-coffee button:focus {
-  outline: 1px solid #EAE6D0;
+  outline: 1px solid #FFFFFF;
   border: 0px;
 }
 
 div.page form.add-coffee button:hover {
-  outline: 1px solid #EAE6D0;
+  outline: 1px solid #FFFFFF;
   border: 0px;
   cursor: pointer;
+}
+
+button.selected i.icon-coffee {
+  color: #331A00;
+}
+
+button:focus i.icon-coffee {
+  color: #331A00;
+}
+
+button:hover i.icon-coffee {
+  color: #331A00;
+}
+
+button.selected i.icon-thumbs-up {
+  color: #00FF66;
+}
+
+button:hover i.icon-thumbs-up {
+  color: #00FF66;
+}
+
+button:focus i.icon-thumbs-up {
+  color: #00FF66;
+}
+
+button.selected i.icon-key-1 {
+  color: #FFCC33;
+}
+
+button:focus i.icon-key-1 {
+  color: #FFCC33;
+}
+
+button:hover i.icon-key-1 {
+  color: #FFCC33;
+}
+
+button.selected i.icon-edit-1 {
+  color: #FF9966;
+}
+
+button:hover i.icon-edit-1 {
+  color: #FF9966;
+}
+
+button:focus i.icon-edit-1 {
+  color: #FF9966;
+}
+
+button.selected i.icon-home-2 {
+  color: #0066FF;
+}
+
+button:focus i.icon-home-2 {
+  color: #0066FF;
+}
+
+button:hover i.icon-home-2 {
+  color: #0066FF;
+}
+
+button.selected i.icon-back-in-time {
+  color: #FFFF33;
+}
+
+button:focus i.icon-back-in-time {
+  color: #FFFF33;
+}
+
+button:hover i.icon-back-in-time {
+  color: #FFFF33;
+}
+
+button.selected i.icon-dollar {
+  color: #339933;
+}
+
+button:focus i.icon-dollar {
+  color: #339933;
+}
+
+button:hover i.icon-dollar {
+  color: #339933;
+}
+
+button.selected i.icon-cart {
+  color: #FFFF33;
+}
+
+button:hover i.icon-cart {
+  color: #FFFF33;
+}
+
+button:focus i.icon-cart {
+  color: #FFFF33;
 }
 
 div.page table.stock {
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
-  background-color: #EAE6D0;
+  background-color: #FFFFFF;
   border-collapse: collapse;
-  box-shadow: 0px 0px 2px 1px #EAE6D0;
+  box-shadow: 0px 0px 2px 1px #FFFFFF;
 }
 
 div.page table.stock td {
   padding-left: 5px;
   font-size: 20px;
-  background-color: #EAE6D0;
+  background-color: #FFFFFF;
   font-family: 'jacques_francoisregular';
   text-align: center;
-  color: #231A00;
+  color: #3A3A3A;
   width: 91px;
 }
 
 div.page form.add-stock input {
   width: 91px;
   border: 0px;
-  background-color: #DED3AD;
+  background-color: #E2E2E2;
   padding-top: 0px;
   padding-bottom: 0px;
   padding-left: 5px;
@@ -511,15 +615,15 @@ div.page form.add-stock input {
   font-family: 'droid_serifregular';
   text-align: right;
   outline: none;
-  color: #231A00;
+  color: #3A3A3A;
   display: inline-block;
-  box-shadow: 0px 0px 1px 1px #EAE6D0 inset;
+  box-shadow: 0px 0px 1px 1px #FFFFFF inset;
 }
 
 div.page form.add-stock input.stock-cost {
   width: 70px;
   border: 0px;
-  background-color: #DED3AD;
+  background-color: #E2E2E2;
   padding-top: 0px;
   padding-bottom: 0px;
   padding-left: 5px;
@@ -529,9 +633,9 @@ div.page form.add-stock input.stock-cost {
   font-family: 'droid_serifregular';
   text-align: right;
   outline: none;
-  color: #231A00;
+  color: #3A3A3A;
   display: inline-block;
-  box-shadow: 0px 0px 0px 0px #EAE6D0 inset;
+  box-shadow: 0px 0px 0px 0px #FFFFFF inset;
 }
 
 div.page form.add-stock span.stock-cost {
@@ -542,44 +646,44 @@ div.page form.add-stock span.stock-cost {
   margin-right: 3px;
   font-size: 20px;
   text-align: left;
-  background-color: #DED3AD;
-  box-shadow: 0px 0px 1px 1px #EAE6D0 inset;
+  background-color: #E2E2E2;
+  box-shadow: 0px 0px 1px 1px #FFFFFF inset;
 }
 
 div.page form.add-stock button {
   margin-top: 2px;
   margin-left: auto;
-  outline: 1px solid #DED3AD;
-  border: 1px solid #DED3AD;
-  background-color: #231A00;
+  outline: 1px solid #E2E2E2;
+  border: 1px solid #E2E2E2;
+  background-color: #3A3A3A;
   margin-right: auto;
   width: 423px;
   height: 43px;
   font-family: 'jacques_francoisregular';
-  color: #DED3AD;
+  color: #E2E2E2;
   font-size: 20px;
   display: block;
 }
 
 div.page form.add-stock button:focus {
-  outline: 1px solid #EAE6D0;
+  outline: 1px solid #FFFFFF;
   border: 0px;
 }
 
 div.page form.add-stock button:hover {
-  outline: 1px solid #EAE6D0;
+  outline: 1px solid #FFFFFF;
   border: 0px;
   cursor: pointer;
 }
 
 div.page form.add-stock select, div.page form.add-stock select:active {
-  background-color: #DED3AD;
+  background-color: #E2E2E2;
   overflow: hidden;
   width: 90px;
   height: 25px;
   font-family: 'jacques_francoisregular';
   font-size: 18px;
-  color: #231A00;
+  color: #3A3A3A;
   outline: none;
   border: 0px;
   margin-bottom: 1px;
@@ -589,36 +693,36 @@ div.page table.summary {
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
-  background-color: #EAE6D0;
+  background-color: #FFFFFF;
   border-collapse: collapse;
-  box-shadow: 0px 0px 2px 1px #EAE6D0;
+  box-shadow: 0px 0px 2px 1px #FFFFFF;
 }
 
 table.summary td.key {
   padding-left: 5px;
   font-size: 20px;
-  background-color: #EAE6D0;
+  background-color: #FFFFFF;
   font-family: 'jacques_francoisregular';
   text-align: left;
-  color: #231A00;
+  color: #3A3A3A;
   width: 190px;
 }
 
 table.summary td.unit {
   font-size: 20px;
-  background-color: #EAE6D0;
+  background-color: #FFFFFF;
   font-family: 'jacques_francoisregular';
   text-align: left;
-  color: #231A00;
+  color: #3A3A3A;
   width: 10px;
 }
 
 table.summary td.value {
   font-size: 20px;
-  background-color: #EAE6D0;
+  background-color: #FFFFFF;
   font-family: 'droid_serifregular';
   text-align: center;
-  color: #231A00;
+  color: #3A3A3A;
   width: 73px;
 }
 
@@ -628,7 +732,7 @@ div.page div.small span {
   font-family: 'jacques_francoisregular';
   text-align: center;
   display: inline-block;
-  color: #231A00;
+  color: #3A3A3A;
 }
 
 div.page>div.center.medium span.center.medium {
@@ -637,7 +741,7 @@ div.page>div.center.medium span.center.medium {
   font-family: 'jacques_francoisregular';
   text-align: center;
   display: inline-block;
-  color: #231A00;
+  color: #3A3A3A;
 }
 
 div.page form span.input {
@@ -649,6 +753,6 @@ div.page form span.input {
   font-family: 'jacques_francoisregular';
   text-align: center;
   display: inline-block;
-  background-color: #EAE6D0;
-  box-shadow: 0px 0px 2px 1px #DED3AD inset;
+  background-color: #FFFFFF;
+  box-shadow: 0px 0px 2px 1px #E2E2E2 inset;
 }

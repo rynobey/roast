@@ -3,6 +3,7 @@ express = require('express')
 app = require('express')()
 Store = require('connect-mysql-session')(express)
 
+
 # Internal imports
 utils = require('./utils')
 schema = require('./schema')
@@ -30,6 +31,8 @@ app.use(express.session({
 app.use(express.bodyParser())
 # host js/css/img locally
 app.use(express.static(__dirname + '/assets'))
+app.use(require('connect-assets')())
+app.use(app.router)
 
 # setup and expose db tables
 app.seq = schema.sequelize(app)
