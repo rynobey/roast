@@ -125,7 +125,7 @@ adminStatsAction = () ->
       totSugar:'-'
     }))
   $('form.add-stock button').bind('click', (e) ->
-    buttonEvent()
+    adminButtonEvent()
   )
 
 loadUserStats = () ->
@@ -134,10 +134,10 @@ loadUserStats = () ->
     success: (data) ->
       statusData = data
       userStatsAction()
-      #setTimeout(unblockUI, timeout)
+      setTimeout(unblockUI, timeout)
     error: () ->
       userStatsAction()
-      #setTimeout(unblockUI, timeout)
+      setTimeout(unblockUI, timeout)
     dataType: 'json'
   })
 
@@ -149,10 +149,10 @@ loadAdminStats = () ->
     success: (data) ->
       statusData = data
       adminStatsAction()
-      #setTimeout(unblockUI, timeout)
+      setTimeout(unblockUI, timeout)
     error: () ->
       adminStatsAction()
-      #setTimeout(unblockUI, timeout)
+      setTimeout(unblockUI, timeout)
     dataType: 'json'
   })
 
