@@ -33,6 +33,7 @@ html ->
       div class:'sidebar', id:'sidebar-right', ->
         div class:'info', ->
           span -> 'coffee'
+      div style:'text-align:center;', -> 'Built for webkit/moz based browsers using NodeJS. (Unstable in IE!)'
 
 coffeescript ->
   $(($) ->
