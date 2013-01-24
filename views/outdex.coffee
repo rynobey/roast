@@ -33,6 +33,8 @@ html ->
       div class:'sidebar', id:'sidebar-left', ->
       div class:'page', id:'page', ->
       div class:'sidebar', id:'sidebar-right', ->
+        div class:'info', ->
+          span -> 'coffee'
 
 coffeescript ->
   $(($) ->
