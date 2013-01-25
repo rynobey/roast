@@ -95,6 +95,19 @@
     },
     {
       "search": [
+        "list"
+      ],
+      "code": 59237,
+      "uid": "ef47651da3866460f27baf85ae234e5c",
+      "file": "list",
+      "css": "list",
+      "orig_css": "list",
+      "orig_code": 59237,
+      "src": "iconic",
+      "from": 59237
+    },
+    {
+      "search": [
         "back",
         "time"
       ],
@@ -105,6 +118,18 @@
       "orig_code": 59249,
       "src": "entypo",
       "from": 59249
+    },
+    {
+      "search": [
+        "list"
+      ],
+      "code": 59280,
+      "from": 59280,
+      "uid": "c819c6225685bae2eed1b8da13e629fa",
+      "css": "list-alt",
+      "orig_css": "list-alt",
+      "orig_code": 59280,
+      "src": "fontawesome"
     },
     {
       "search": [
@@ -177,21 +202,6 @@
       "orig_css": "thumbs-up",
       "orig_code": 128077,
       "src": "fontawesome"
-    },
-    {
-      "search": [
-        "thumbs",
-        "up",
-        "like",
-        "vote"
-      ],
-      "code": 59395,
-      "from": 128077,
-      "uid": "tau7t0t38662eqxrb80ozeiase5em2x9",
-      "css": "thumbs-up-1",
-      "orig_css": "thumbs-up",
-      "orig_code": 59395,
-      "src": "typicons"
     },
     {
       "search": [
@@ -307,16 +317,17 @@
     },
     {
       "search": [
-        "key",
-        "password"
+        "book",
+        "doc"
       ],
-      "code": 59402,
-      "uid": "8beac4a5fd5bed9f82ca7a96cc8ba218",
-      "css": "key-2",
-      "orig_css": "key",
-      "orig_code": 59402,
-      "src": "entypo",
-      "from": 128273
+      "code": 128214,
+      "uid": "8fc56819afcd07e2786e34f18d39b71b",
+      "file": "book_alt2",
+      "css": "book-open",
+      "orig_css": "book-open",
+      "orig_code": 128214,
+      "src": "iconic",
+      "from": 128214
     },
     {
       "search": [
@@ -330,18 +341,6 @@
       "orig_code": 128273,
       "src": "iconic",
       "from": 128273
-    },
-    {
-      "search": [
-        "key"
-      ],
-      "code": 59397,
-      "from": 128273,
-      "uid": "upidp9k72x66utj5w89oyq65tp6r2tpe",
-      "css": "key",
-      "orig_css": "key",
-      "orig_code": 59397,
-      "src": "typicons"
     },
     {
       "search": [

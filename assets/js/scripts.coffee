@@ -1,6 +1,10 @@
 $ = jQuery
 timeout = 500
 statusData = {}
+paymentData = {}
+startIndex = 0
+iPerPage = 5
+endIndex = startIndex + iPerPage
 
 processResponse = (data) ->
   if data.success
@@ -12,7 +16,7 @@ processResponse = (data) ->
       $(window).trigger('hashChange')
 
 isOnAdminHome = () ->
-  if $.bbq.getState('url').indexOf('/home/add-stock') is 0 or $.bbq.getState('url').indexOf('/home/confirm-payments') is 0
+  if $.bbq.getState('url').indexOf('/home/add-stock') is 0 or $.bbq.getState('url').indexOf('/home/confirm-payments') is 0 or $.bbq.getState('url').indexOf('/home/account-stats') is 0
     return true
   else
     return false
@@ -38,6 +42,7 @@ isOnUserHistory = () ->
 appendAdminHomeSidebarButtons = () ->
   $('div#sidebar-left').append("<button type='button' class='sidebar-button' id='stock' href='/home/add-stock'><i class='icon-cart'></i></button>")
   $('div#sidebar-left').append("<button type='button' class='sidebar-button' id='payments' href='/home/confirm-payments'><i class='icon-dollar'></button>")
+  $('div#sidebar-left').append("<button type='button' class='sidebar-button' id='accounts' href='/home/account-stats'><i class='icon-list-alt'></button>")
 
 appendUserHomeSidebarButtons = () ->
   $('div#sidebar-left').append("<button type='button' class='sidebar-button' id='coffee' href='/home/add-coffee'><i class='icon-coffee'></i></button>")
@@ -54,6 +59,8 @@ sidebarButtons = () ->
         $("button#stock").addClass('selected')
       else if url.indexOf('/home/confirm-payments') is 0
         $("button#payments").addClass('selected')
+      else if url.indexOf('/home/account-stats') is 0
+        $("button#accounts").addClass('selected')
     else if isOnUserHome()
       appendUserHomeSidebarButtons()
       if url.indexOf('/home/add-coffee') is 0
@@ -89,6 +96,29 @@ $.fn.navButtonEvent = navButtonEvent
 unblockUI = () ->
   timeout = 500
   $.unblockUI({fadeOut:100})
+
+genPaymentHTML = (name, email, amount, id, empty) ->
+  if not empty? or (empty? and not empty)
+    html = """
+      <tr>
+        <td class="name">#{name}</td>
+        <td class="email">#{email}</td>
+        <td class="amount">R #{amount}</td>
+        <td class="button">
+          <button type="button" id="#{id}">Yes</button>
+        </td>
+      </tr>
+    """
+  else if empty? and empty
+    html = """
+      <tr>
+        <td class="name"></td>
+        <td class="email"></td>
+        <td class="amount"></td>
+        <td class="button"></td>
+      </tr>
+    """
+  return html
 
 userStatsAction = () ->
   if statusData? and statusData.balance? and statusData.totSpent?
@@ -127,6 +157,54 @@ adminStatsAction = () ->
   $('form.add-stock button').bind('click', (e) ->
     adminButtonEvent()
   )
+
+paymentListAction = () ->
+  if paymentData?
+    $('table#confirm-payments tr+tr').remove()
+    current = startIndex
+    for payment in paymentData
+      if not payment.confirmed
+        $('table#confirm-payments').append(genPaymentHTML(payment.name, payment.email, payment.amount, payment.id))
+        current = current + 1
+        if current >= endIndex
+          break
+    while current < endIndex
+      $('table#confirm-payments').append(genPaymentHTML('','','','', true))
+      current = current + 1
+  else
+    console.log "error"
+  $('table#confirm-payments').find('button').on('click', (e) ->
+    $.blockUI({
+      fadeIn: 100,
+      message: $(templates.loader()),
+      css: {
+        left: '48%',
+        width: '0px',
+        opacity: 0.6,
+        border: '0px',
+        color: '#FFFFFF'
+      }
+    })
+    $.post('/users/payments', "id=#{$(this).attr('id')}", (data) ->
+      loadPayments()
+      loadAdminStats()
+    )
+  )
+
+loadPayments = () ->
+  $.ajax({
+    url: '/users/payments'
+    success: (data) ->
+      paymentData = data
+      paymentListAction()
+      setTimeout(unblockUI, timeout)
+    error: () ->
+      paymentListAction()
+      setTimeout(unblockUI, timeout)
+    dataType: 'json'
+  })
+
+$.fn.loadPayments = loadPayments
 
 loadUserStats = () ->
   $.ajax({

@@ -61,6 +61,21 @@ module.exports = ((app) ->
         res.render('confirm-payments')
   )
 
+  app.get('/home/account-stats', (req, res, next) ->
+    if req.user.type isnt '1'
+      res.json({
+        success: true,
+        redirect: '/home/add-coffee'
+      })
+    else
+      msg = app.locals.dispMsg
+      if msg? and msg isnt ''
+        app.locals.dispMsg = ''
+        res.render('account-stats', {msg: msg})
+      else
+        res.render('account-stats')
+  )
+
   app.get('/home/add-coffee', (req, res,next) ->
     if req.user.type is '1'
       res.json({

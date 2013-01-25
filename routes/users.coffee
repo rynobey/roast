@@ -4,6 +4,36 @@ async = require('async')
 # Export the routes
 module.exports = ((app) ->
 
+  app.get('/users/account-stats', (req, res, next) ->
+    oneDay = 24*60*60*1000
+    today = new Date()
+    dInMonth = (new Date(today.getYear(), today.getMonth(), 0)).getDate()
+    dToStart = dInMonth - today.getDate() + 1
+    dInNextMonth = 31
+    if today.getMonth() is 11
+      dInNextMonth = (new Date(today.getYear() + 1, 0, 0)).getDate()
+    else
+      dInNextMonth = (new Date(today.getYear(), today.getMonth() + 1, 0)).getDate()
+    if req.user.type is '1'
+      app.users.findAll().success((users) ->
+        for user in users
+          app.coffees.findAll({order: 'createdAt ASC'}).success((coffees) ->
+            firstTime = (user.createdAt).getTime()
+            lastTime = (coffees[coffees.length-1].createdAt).getTime()
+            secondTime = today.getTime()
+            numDaysAvg = Math.round(Math.abs((secondTime - firstTime)/(oneDay)) + 1)
+            numDaysUpd = Math.round(Math.abs((secondTime - lastTime)/(oneDay)) + 1)
+            cPerD = Math.round((coffees.length/numDaysAvg)*100)/100
+            pPerC = parseFloat(app.set('coffee price'))
+            recPayment = pPerC*cPerD*(numDaysUpd + dToStart + dInNextMonth)
+            recPayment = recPayment - parseFloat(user.balance)
+            console.log "#{user.name}, #{numDaysUpd}, #{cPerD}, #{user.balance}, #{recPayment}"
+          )
+      )
+    else
+
+  )
+
   app.get('/users/summary', (req, res, next) ->
     if req.user.type is '1'
       app.purchases.findAll().success((purchases) ->
