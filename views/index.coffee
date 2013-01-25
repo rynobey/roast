@@ -6,15 +6,12 @@ html ->
     link type:'text/css', rel:'stylesheet', href:'/css/stylesheet.css'
     link type:"text/css", rel:"stylesheet", href:"/css/fonts/stylesheet.css"
     link type:"text/css", rel:"stylesheet", href:"/css/icons/package1/css/icons.css"
-    #text global.css('jquery-ui.css')
-    #text global.css('stylesheet.css')
-    #text global.css('fonts/stylesheet.css')
-    #text global.css('icons/package1/css/icons.css')
     text global.js('jquery-1.8.3.min.js')
     text global.js('jquery.ba-bbq.min.js')
     text global.js('jquery-ui.js')
     text global.js('block-ui.js')
     text global.js('scripts')
+
   body class:'background', ->
     div class:'navbar', ->
       div class:'center', ->
@@ -33,7 +30,7 @@ html ->
       div class:'sidebar', id:'sidebar-right', ->
         div class:'info', ->
           span -> 'coffee'
-      div style:'text-align:center;', -> 'Built for webkit/moz based browsers using NodeJS. (Unstable in IE!)'
+      div style:'text-align:center;', -> 'Built for webkit/gecko based browsers using NodeJS. (Unstable in IE!)'
 
 coffeescript ->
   $(($) ->
