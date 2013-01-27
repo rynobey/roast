@@ -8,7 +8,8 @@ div class:'page', id:'page', ->
       tr ->
         td class:'name', -> 'Name'
         td class:'email', -> 'E-mail'
-        td class:'amount', -> 'Amount'
+        td class:'amount', ->
+          span -> 'Amount'
         td class:'button', -> 'Received'
   div class: 'center small', ->
     span class:'space', -> 'Stats'

@@ -2,9 +2,12 @@ $ = jQuery
 timeout = 500
 statusData = {}
 paymentData = {}
+accountsData = {}
 startIndex = 0
 iPerPage = 5
+iPerPageAccount = 19
 endIndex = startIndex + iPerPage
+endIndexAccounts = startIndex + iPerPageAccount
 
 processResponse = (data) ->
   if data.success
@@ -100,25 +103,23 @@ unblockUI = () ->
 genPaymentHTML = (name, email, amount, id, empty) ->
   if not empty? or (empty? and not empty)
     html = """
-      <tr>
-        <td class="name">#{name}</td>
-        <td class="email">#{email}</td>
-        <td class="amount">R #{amount}</td>
-        <td class="button">
-          <button type="button" id="#{id}">Yes</button>
-        </td>
-      </tr>
+      <tr><td class="name">#{name}</td><td class="email">#{email}</td><td class="amount">R #{amount}</td><td class="button"><button type="button" id="#{id}">Yes</button></td></tr>
     """
   else if empty? and empty
     html = """
-      <tr>
-        <td class="name"></td>
-        <td class="email"></td>
-        <td class="amount"></td>
-        <td class="button"></td>
-      </tr>
+      <tr><td class="name"></td><td class="email"></td><td class="amount"></td><td class="button"></td></tr>
     """
   return html
+
+genAccountHTML = (name, lastUpdated, cPerD, balance, recPayment, empty) ->
+  if not empty? or (empty? and not empty)
+    html = """
+      <tr><td class="name">#{name}</td><td class="numeric">#{lastUpdated} Day(s) ago</td><td class="numeric">#{cPerD}</td><td class="numeric">R #{balance}</td><td class="numeric">R #{recPayment}</td></tr>
+    """
+  else if empty? and empty
+    html = """
+      <tr><td class="name"></td><td class="numeric"></td><td class="numeric"></td><td class="numeric"></td><td class="numeric"></td></tr>
+    """
 
 userStatsAction = () ->
   if statusData? and statusData.balance? and statusData.totSpent?
@@ -172,7 +173,6 @@ paymentListAction = () ->
       $('table#confirm-payments').append(genPaymentHTML('','','','', true))
       current = current + 1
   else
-    console.log "error"
   $('table#confirm-payments').find('button').on('click', (e) ->
     $.blockUI({
       fadeIn: 100,
@@ -190,6 +190,19 @@ paymentListAction = () ->
       loadAdminStats()
     )
   )
+
+accountStatsAction = () ->
+  if accountsData?
+    $('table#account-stats tr+tr').remove()
+    current = startIndex
+    for item in accountsData
+      $('table#account-stats').append(genAccountHTML(item.name, item.lastUpdated, item.cupsPerDay, item.balance, item.recPayment))
+      current = current + 1
+      if current >= endIndexAccounts
+        break
+    while current < endIndexAccounts
+      $('table#account-stats').append(genAccountHTML('','','','', '', true))
+      current = current + 1
 
 loadPayments = () ->
   $.ajax({
@@ -235,6 +248,21 @@ loadAdminStats = () ->
   })
 
 $.fn.loadAdminStats = loadAdminStats
+
+loadAccountStats = () ->
+  $.ajax({
+    url: '/users/account-stats'
+    success: (data) ->
+      accountsData = data
+      accountStatsAction()
+      setTimeout(unblockUI, timeout)
+    error: () ->
+      accountStatsAction()
+      setTimeout(unblockUI, timeout)
+    dataType: 'json'
+  })
+
+$.fn.loadAccountStats = loadAccountStats
 
 userButtonEvent = () ->
   $('form button').unbind('click')

@@ -3,14 +3,17 @@ div class:'page', id:'page', ->
     span class:'center large', -> 'User Account Stats'
     table id:'account-stats', ->
       tr ->
-        td class:'rank', -> 'Rank'
         td class:'name', -> 'Name'
-        td class:'updated', -> 'Last Updated'
-        td class:'cups', -> 'Cups/Day'
-        td class:'balance', -> 'Balance'
-        td class:'recpayment', -> 'Rec. Payment'
+        td class:'numeric', ->
+          span -> 'Last Updated'
+        td class:'numeric', ->
+          span -> 'Cups/Day'
+        td class:'numeric', ->
+          span -> 'Balance'
+        td class:'numeric', ->
+          span -> 'Rec. Payment'
 
 coffeescript ->
   $(($) ->
-    #$(this).loadAccountStats()
+    $(this).loadAccountStats()
   )

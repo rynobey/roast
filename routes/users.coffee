@@ -7,6 +7,7 @@ module.exports = ((app) ->
   app.get('/users/account-stats', (req, res, next) ->
     oneDay = 24*60*60*1000
     today = new Date()
+    pPerC = parseFloat(app.set('coffee price'))
     dInMonth = (new Date(today.getYear(), today.getMonth(), 0)).getDate()
     dToStart = dInMonth - today.getDate() + 1
     dInNextMonth = 31
@@ -15,23 +16,47 @@ module.exports = ((app) ->
     else
       dInNextMonth = (new Date(today.getYear(), today.getMonth() + 1, 0)).getDate()
     if req.user.type is '1'
-      app.users.findAll().success((users) ->
-        for user in users
-          app.coffees.findAll({order: 'createdAt ASC'}).success((coffees) ->
-            firstTime = (user.createdAt).getTime()
-            lastTime = (coffees[coffees.length-1].createdAt).getTime()
-            secondTime = today.getTime()
-            numDaysAvg = Math.round(Math.abs((secondTime - firstTime)/(oneDay)) + 1)
-            numDaysUpd = Math.round(Math.abs((secondTime - lastTime)/(oneDay)) + 1)
-            cPerD = Math.round((coffees.length/numDaysAvg)*100)/100
-            pPerC = parseFloat(app.set('coffee price'))
-            recPayment = pPerC*cPerD*(numDaysUpd + dToStart + dInNextMonth)
-            recPayment = recPayment - parseFloat(user.balance)
-            console.log "#{user.name}, #{numDaysUpd}, #{cPerD}, #{user.balance}, #{recPayment}"
+      app.users.findAll({where: "email <> 'roastbanker@gmail.com'"}).success((users) ->
+        if users?
+          i = 0
+          items = new Array(users.length)
+          async.whilst(
+            () ->
+              return i < users.length
+            (cb) ->
+              user = users[i]
+              firstTime = (user.createdAt).getTime()
+              secondTime = today.getTime()
+              app.coffees.findAll({order:'createdAt ASC', where: {consumedByID:user.id}}).success((coffees) ->
+                lastTime = today.getTime()
+                cPerD = 1.5
+                numDaysAvg = Math.round(Math.abs((secondTime - firstTime)/(oneDay)) + 1)
+                if coffees? and coffees.length > 10
+                  lastTime = (coffees[coffees.length-1].createdAt).getTime()
+                  cPerD = Math.round((coffees.length/numDaysAvg)*100)/100
+                numDaysUpd = Math.round(Math.abs((secondTime - lastTime)/(oneDay)) + 1)
+                recPayment = pPerC*cPerD*(numDaysUpd + dToStart + dInNextMonth)
+                recPayment = recPayment - parseFloat(user.balance)
+                recPayment = Math.round(recPayment*100)/100
+                if recPayment < 0
+                  recPayment = 0
+                item = {
+                  name: user.name,
+                  lastUpdated: numDaysUpd,
+                  cupsPerDay: cPerD,
+                  balance: user.balance,
+                  recPayment: recPayment
+                }
+                items[i] = item
+                i = i + 1
+                cb()
+              )
+            (err) ->
+              res.json(items)
           )
       )
     else
-
+      res.json({success: false})
   )
 
   app.get('/users/summary', (req, res, next) ->
