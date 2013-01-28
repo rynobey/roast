@@ -62,7 +62,7 @@ app.get('/partials/:item', (req, res, next) ->
 )
 
 # Start the app
-app.listen(3000)
+app.listen(80)
 
 # Exports
 module.exports = app

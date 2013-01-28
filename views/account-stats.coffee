@@ -5,13 +5,15 @@ div class:'page', id:'page', ->
       tr ->
         td class:'name', -> 'Name'
         td class:'numeric', ->
-          span -> 'Last Updated'
+          span -> 'Updated'
         td class:'numeric', ->
           span -> 'Cups/Day'
         td class:'numeric', ->
+          span -> 'Total Cups'
+        td class:'numeric', ->
           span -> 'Balance'
         td class:'numeric', ->
-          span -> 'Rec. Payment'
+          span -> 'Rec. Paym.'
 
 coffeescript ->
   $(($) ->
