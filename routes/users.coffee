@@ -29,12 +29,12 @@ module.exports = ((app) ->
               secondTime = today.getTime()
               app.coffees.findAll({order:'createdAt ASC', where: {consumedByID:user.id}}).success((coffees) ->
                 lastTime = today.getTime()
-                cPerD = 1.5
+                cPerD = 0
                 numDaysAvg = Math.round(Math.abs((secondTime - firstTime)/(oneDay)) + 1)
-                if coffees? and coffees.length > 10
+                if coffees? and coffees.length > 1
                   lastTime = (coffees[coffees.length-1].createdAt).getTime()
                   cPerD = Math.round((coffees.length/numDaysAvg)*100)/100
-                numDaysUpd = Math.round(Math.abs((secondTime - lastTime)/(oneDay)) + 1)
+                numDaysUpd = Math.round(Math.abs((secondTime - lastTime)/(oneDay)) + 1) - 1
                 recPayment = pPerC*cPerD*(numDaysUpd + dToStart + dInNextMonth)
                 recPayment = recPayment - parseFloat(user.balance)
                 recPayment = Math.round(recPayment*100)/100
