@@ -5,7 +5,7 @@ paymentData = {}
 accountsData = {}
 startIndex = 0
 iPerPage = 5
-iPerPageAccount = 19
+iPerPageAccount = 17
 endIndex = startIndex + iPerPage
 endIndexAccounts = startIndex + iPerPageAccount
 
@@ -111,14 +111,14 @@ genPaymentHTML = (name, email, amount, id, empty) ->
     """
   return html
 
-genAccountHTML = (name, lastUpdated, cPerD, balance, recPayment, empty) ->
+genAccountHTML = (name, lastUpdated, cPerD, totCups, balance, recPayment, empty) ->
   if not empty? or (empty? and not empty)
     html = """
-      <tr><td class="name">#{name}</td><td class="numeric">#{lastUpdated} Day(s) ago</td><td class="numeric">#{cPerD}</td><td class="numeric">R #{balance}</td><td class="numeric">R #{recPayment}</td></tr>
+      <tr><td class="name">#{name}</td><td class="numeric">#{lastUpdated} Day(s)</td><td class="numeric">#{cPerD}</td><td class="numeric">#{totCups}</td><td class="numeric">R #{balance}</td><td class="numeric">R #{recPayment}</td></tr>
     """
   else if empty? and empty
     html = """
-      <tr><td class="name"></td><td class="numeric"></td><td class="numeric"></td><td class="numeric"></td><td class="numeric"></td></tr>
+      <tr><td class="name"></td><td class="numeric"></td><td class="numeric"></td><td class="numeric"></td><td class="numeric"></td><td class="numeric"></td></tr>
     """
 
 userStatsAction = () ->
@@ -196,12 +196,12 @@ accountStatsAction = () ->
     $('table#account-stats tr+tr').remove()
     current = startIndex
     for item in accountsData
-      $('table#account-stats').append(genAccountHTML(item.name, item.lastUpdated, item.cupsPerDay, item.balance, item.recPayment))
+      $('table#account-stats').append(genAccountHTML(item.name, item.lastUpdated, item.cupsPerDay, item.totCups, item.balance, item.recPayment))
       current = current + 1
       if current >= endIndexAccounts
         break
     while current < endIndexAccounts
-      $('table#account-stats').append(genAccountHTML('','','','', '', true))
+      $('table#account-stats').append(genAccountHTML('','','','', '', '', true))
       current = current + 1
 
 loadPayments = () ->

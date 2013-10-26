@@ -370,7 +370,7 @@ table#account-stats {
   margin-right: auto;
   margin-top: 10px;
   width: 550px;
-  height: 403px;
+  height: 400px;
   background-color: #FFFFFF;
   border-collapse: collapse;
   box-shadow: 0px 0px 2px 1px #FFFFFF;
@@ -397,7 +397,7 @@ table#account-stats td {
   text-align: center;
   color: #3A3A3A;
   height: 19px;
-  width: 107px;
+  width: 88px;
   display: inline-block;
 }
 
@@ -409,14 +409,14 @@ table#account-stats td.numeric {
   text-align: center;
   color: #3A3A3A;
   height: 19px;
-  width: 107px;
+  width: 88px;
   display: inline-block;
 }
 
 table#account-stats td.numeric>span {
   font-family: 'jacques_francoisregular';
   display: inline-block;
-  width: 107px;
+  width: 88px;
 }
 
 table#confirm-payments {
