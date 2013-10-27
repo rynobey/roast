@@ -352,6 +352,15 @@ $.fn.inputBehaviour = (id) ->
         el.replaceWith('<input type="email" id="email" name="email"></input>')
       else if id is 'password'
         el.replaceWith('<input type="password" id="password" name="password"></input>')
+        $('input#password').keypress((e) ->
+          if $('form.login-register').find('input').attr('class') is 'default'
+            e.preventDefault()
+          else if e.which is 13
+            $('form.login-register').find('input#hash').attr('value',
+              hex_sha1($('form.login-register').find('input#password').attr('value')))
+            $('form.login-register').find('input#password').attr('value', '')
+            $('form.login-register').submit()
+        )
       else if id is 'name'
         el.replaceWith('<input type="text" id="name" name="name"></input>')
       $("##{id}").focus()
