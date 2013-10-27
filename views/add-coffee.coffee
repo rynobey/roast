@@ -7,7 +7,7 @@ div class:'page', id:'page', ->
       span class:'space', -> 'Add Coffee'
       span class:'input', ->
         label for:'params', -> 'Qty:'
-        input type: 'text', id: 'params', name: 'params', value: '1', onkeypress:"return event.keyCode!=13;"
+        input type: 'text', id: 'params-coffee', name: 'params', value: '1', onkeypress:"return event.keyCode!=13;"
         text ' Coffee(s)'
         input type: 'hidden', id: 'operation', name: 'operation', value: 'add'
       button type: 'button', class: 'add-coffee',->
@@ -18,7 +18,7 @@ div class:'page', id:'page', ->
       span class:'space', -> 'Add Milk'
       span class:'input', ->
         label for:'params', -> 'Qty:'
-        input type: 'text', id: 'params', name: 'params', value: '100', onkeypress:"return event.keyCode!=13;"
+        input type: 'text', id: 'params-milk', name: 'params', value: '100', onkeypress:"return event.keyCode!=13;"
         text ' ml'
         input type: 'hidden', id: 'operation', name: 'operation', value: 'add'
       button type: 'button', class: 'add-milk',->
@@ -31,9 +31,13 @@ div class:'page', id:'page', ->
 
 coffeescript ->
   $(($) ->
-    $('input#params').attr('autocomplete', 'off')
-    $('div.center span.input').on('click', () ->
-      $('div.center input#params').focus()
+    $('input#params-coffee').attr('autocomplete', 'off')
+    $('input#params-milk').attr('autocomplete', 'off')
+    $('form.add-coffee span.input').on('click', () ->
+      $('input#params-coffee').focus()
+    )
+    $('form.add-milk span.input').on('click', () ->
+      $('input#params-milk').focus()
     )
     $(document).ready(() ->
       $(this).loadUserStats()
