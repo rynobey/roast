@@ -31,7 +31,7 @@ module.exports = ((app) ->
                 lastTime = today.getTime()
                 cPerD = 0
                 numDaysAvg = Math.round(Math.abs((secondTime - firstTime)/(oneDay)) + 1)
-                if coffees? and coffees.length > 0
+                if coffees? and coffees.length > 1
                   lastTime = (coffees[coffees.length-1].createdAt).getTime()
                   cPerD = Math.round((coffees.length/numDaysAvg)*100)/100
                 numDaysUpd = Math.round(Math.abs((secondTime - lastTime)/(oneDay)) + 1) - 1
