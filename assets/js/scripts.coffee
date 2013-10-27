@@ -281,9 +281,14 @@ userButtonEvent = () ->
   })
   url = $.bbq.getState('url')
   if url.indexOf('/home/add-coffee') is 0
-    $.post('/users/coffees', $('form.add-coffee').serialize(), (data) ->
-      loadUserStats()
-    )
+    if $('button.add-coffee').is(':focus') or $('button.add-coffee').is(':hover')
+      $.post('/users/coffees', $('form.add-coffee').serialize(), (data) ->
+        loadUserStats()
+      )
+    else if $('button.add-milk').is(':focus') or $('button.add-milk').is(':hover')
+      $.post('/users/milk', $('form.add-milk').serialize(), (data) ->
+        loadUserStats()
+      )
   else if url.indexOf('/home/add-payment') is 0
     $.post('/users/payments', $('form.add-coffee').serialize(), (data) ->
       loadUserStats()

@@ -267,6 +267,37 @@ module.exports = ((app) ->
     )
   )
 
+  app.post('/users/milk', (req, res, next) ->
+    op = req.param('operation', null)
+    params = req.param('params', null)
+    sid = utils.extractSID(req.cookies['connect.sid'])
+    app.users.find({where: {sid: sid}}).success((user) ->
+      if user?
+        if (not (params >= 0)) or (not utils.isNumber(params))
+          params = 0
+          amount = 0
+        if (op? and op is 'add') and params > 0
+          amount = params
+          milk = app.milk.build({
+            consumedByID: user.id
+            amount: amount
+            cost: amount*app.set("milk price")
+          })
+          milk.save().success(() ->
+            user.balance = user.balance - amount*app.set("milk price")
+            user.save(['balance']).success(() ->
+              res.json({
+                success: true,
+              })
+            )
+          )
+        else
+          res.json({
+            success: true,
+          })
+    )
+  )
+
   app.get('/users/all', (req, res, next) ->
     sid = utils.extractSID(req.cookies['connect.sid'])
     app.users.find({where: {sid: sid}}).success((user) ->

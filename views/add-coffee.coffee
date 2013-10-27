@@ -8,8 +8,20 @@ div class:'page', id:'page', ->
       span class:'input', ->
         label for:'params', -> 'Qty:'
         input type: 'text', id: 'params', name: 'params', value: '1', onkeypress:"return event.keyCode!=13;"
+        text ' Coffee(s)'
         input type: 'hidden', id: 'operation', name: 'operation', value: 'add'
-      button type: 'button',->
+      button type: 'button', class: 'add-coffee',->
+        i class:'icon-thumbs-up', ->
+        text 'Submit'
+  div class: 'center small', ->
+    form class:'add-milk', action: '/users/milk', method: 'post', ->
+      span class:'space', -> 'Add Milk'
+      span class:'input', ->
+        label for:'params', -> 'Qty:'
+        input type: 'text', id: 'params', name: 'params', value: '100', onkeypress:"return event.keyCode!=13;"
+        text ' ml'
+        input type: 'hidden', id: 'operation', name: 'operation', value: 'add'
+      button type: 'button', class: 'add-milk',->
         i class:'icon-thumbs-up', ->
         text 'Submit'
   div class: 'center small', ->

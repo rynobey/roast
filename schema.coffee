@@ -57,6 +57,19 @@ module.exports.coffees = (sequelize) ->
   })
   return coffees
 
+module.exports.milk = (sequelize) ->
+  milk = sequelize.define('Milk', {
+    id: {
+      type:Sequelize.INTEGER,
+      primaryKey:true,
+      autoIncrement:true
+    },
+    consumedByID: Sequelize.INTEGER,
+    amount: Sequelize.INTEGER,
+    cost: Sequelize.FLOAT
+  })
+  return milk
+
 module.exports.purchases = (sequelize) ->
   purchases = sequelize.define('Purchase', {
     id: {

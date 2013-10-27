@@ -591,6 +591,47 @@ div.page form.add-coffee button:hover {
   cursor: pointer;
 }
 
+div.page form.add-milk input {
+  border: 0px;
+  background-color: #FFFFFF;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 60px;
+  height: 26px;
+  font-size: 20px;
+  font-family: 'droid_serifregular';
+  text-align: right;
+  outline: none;
+  color: #3A3A3A;
+  display: inline-block;
+}
+
+div.page form.add-milk button {
+  margin-top: 1px;
+  margin-left: 1px;
+  outline: 1px solid #E2E2E2;
+  border: 1px solid #E2E2E2;
+  background-color: #3A3A3A;
+  margin-right: auto;
+  width: 273px;
+  height: 43px;
+  font-family: 'jacques_francoisregular';
+  color: #E2E2E2;
+  font-size: 20px;
+}
+
+div.page form.add-milk button:focus {
+  outline: 1px solid #FFFFFF;
+  border: 0px;
+}
+
+div.page form.add-milk button:hover {
+  outline: 1px solid #FFFFFF;
+  border: 0px;
+  cursor: pointer;
+}
 button.selected i.icon-coffee {
   color: #331A00;
 }
