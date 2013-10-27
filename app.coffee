@@ -41,6 +41,7 @@ app.users = schema.users(app.seq)
 app.coffees = schema.coffees(app.seq)
 app.purchases = schema.purchases(app.seq)
 app.payments = schema.payments(app.seq)
+app.milk = schema.milk(app.seq)
 app.seq.sync().success(() ->
   schema.checkDBInit(app.users)
 )
